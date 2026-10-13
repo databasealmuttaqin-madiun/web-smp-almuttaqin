@@ -1,0 +1,1269 @@
+<div class="min-h-screen bg-slate-100/80 pb-20">
+  
+  <!-- Top Admin Control Bar -->
+  <div class="bg-slate-900 text-white border-b border-slate-800 sticky top-20 z-30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-[#0052FF] text-white flex items-center justify-center font-bold shadow-sm shadow-blue-500/20">
+            <mat-icon class="text-xl">dashboard_customize</mat-icon>
+          </div>
+          <div>
+            <h1 class="text-base sm:text-lg font-bold text-white leading-tight">
+              Panel Pengelola Konten Website
+            </h1>
+            <p class="text-xs text-slate-400">
+              SMP Al Muttaqin Kota Madiun · Masuk sebagai <strong class="text-white">{{ authService.currentUser()?.role }}</strong> ({{ authService.currentUser()?.email }})
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <a
+            routerLink="/beranda"
+            class="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-slate-200 bg-white/10 hover:bg-white/20 rounded-xl transition-colors"
+          >
+            <mat-icon class="text-sm">open_in_new</mat-icon>
+            <span>Lihat Website</span>
+          </a>
+
+          <button
+            type="button"
+            (click)="logout()"
+            class="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-rose-200 bg-rose-900/40 hover:bg-rose-900/70 border border-rose-800/60 rounded-xl transition-colors cursor-pointer"
+          >
+            <mat-icon class="text-sm">logout</mat-icon>
+            <span>Keluar</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Feedback Notification -->
+  @if (successToast()) {
+    <div class="fixed bottom-6 right-6 z-50 bg-slate-900 text-white px-5 py-3.5 rounded-2xl shadow-2xl border border-blue-500/40 flex items-center gap-3 animate-fadeIn">
+      <mat-icon class="text-[#0052FF]">check_circle</mat-icon>
+      <span class="text-xs sm:text-sm font-semibold">{{ successToast() }}</span>
+    </div>
+  }
+
+  <!-- Main Management Container -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+
+    <!-- Overview Metrics Cards (Selaras dengan 4 Metrik Beranda & Galeri) -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-4 mb-8">
+      
+      <!-- Metrik 1: Siswa -->
+      <button
+        type="button"
+        (click)="setTab('beranda')"
+        class="text-left p-4 bg-white rounded-2xl border border-slate-200 shadow-2xs cursor-pointer hover:border-[#0052FF] transition-all focus:outline-none focus:ring-2 focus:ring-[#0052FF]"
+      >
+        <div class="flex items-center justify-between text-[#0052FF] mb-1">
+          <span class="text-xs font-medium text-slate-500">Jumlah Siswa</span>
+          <mat-icon class="text-lg">school</mat-icon>
+        </div>
+        <div class="text-2xl font-black text-slate-900 font-mono">
+          {{ profile().studentStats?.totalStudents || 486 }}
+        </div>
+        <div class="text-[11px] text-slate-400 mt-0.5 truncate">
+          {{ profile().studentStats?.maleStudents || 254 }} Pa · {{ profile().studentStats?.femaleStudents || 232 }} Pi
+        </div>
+      </button>
+
+      <!-- Metrik 2: Rombel -->
+      <button
+        type="button"
+        (click)="setTab('beranda')"
+        class="text-left p-4 bg-white rounded-2xl border border-slate-200 shadow-2xs cursor-pointer hover:border-[#0052FF] transition-all focus:outline-none focus:ring-2 focus:ring-[#0052FF]"
+      >
+        <div class="flex items-center justify-between text-[#0052FF] mb-1">
+          <span class="text-xs font-medium text-slate-500">Jumlah Rombel</span>
+          <mat-icon class="text-lg">meeting_room</mat-icon>
+        </div>
+        <div class="text-2xl font-black text-slate-900 font-mono">
+          {{ profile().studentStats?.totalRombel || 15 }}
+        </div>
+        <div class="text-[11px] text-slate-400 mt-0.5 truncate">
+          Kelas VII, VIII, & IX
+        </div>
+      </button>
+
+      <!-- Metrik 3: Guru -->
+      <button
+        type="button"
+        (click)="setTab('teachers')"
+        class="text-left p-4 bg-white rounded-2xl border border-slate-200 shadow-2xs cursor-pointer hover:border-[#0052FF] transition-all focus:outline-none focus:ring-2 focus:ring-[#0052FF]"
+      >
+        <div class="flex items-center justify-between text-[#0052FF] mb-1">
+          <span class="text-xs font-medium text-slate-500">Tenaga Pendidik</span>
+          <mat-icon class="text-lg">groups</mat-icon>
+        </div>
+        <div class="text-2xl font-black text-slate-900 font-mono">
+          {{ profile().studentStats?.totalTeachers || 28 }}
+        </div>
+        <div class="text-[11px] text-[#0052FF] font-semibold mt-0.5 truncate">
+          {{ teachers().length }} Guru di Direktori
+        </div>
+      </button>
+
+      <!-- Metrik 4: Tenaga Kependidikan -->
+      <button
+        type="button"
+        (click)="setTab('beranda')"
+        class="text-left p-4 bg-white rounded-2xl border border-slate-200 shadow-2xs cursor-pointer hover:border-[#0052FF] transition-all focus:outline-none focus:ring-2 focus:ring-[#0052FF]"
+      >
+        <div class="flex items-center justify-between text-[#0052FF] mb-1">
+          <span class="text-xs font-medium text-slate-500">Tenaga Kependidikan</span>
+          <mat-icon class="text-lg">badge</mat-icon>
+        </div>
+        <div class="text-2xl font-black text-slate-900 font-mono">
+          {{ profile().studentStats?.totalEducationalStaff || 10 }}
+        </div>
+        <div class="text-[11px] text-slate-400 mt-0.5 truncate">
+          Staf Tata Usaha & Layanan
+        </div>
+      </button>
+
+      <!-- Metrik 5: Galeri Foto -->
+      <button
+        type="button"
+        (click)="setTab('gallery')"
+        class="text-left p-4 bg-white rounded-2xl border border-slate-200 shadow-2xs cursor-pointer hover:border-[#0052FF] transition-all focus:outline-none focus:ring-2 focus:ring-[#0052FF] col-span-2 sm:col-span-1"
+      >
+        <div class="flex items-center justify-between text-[#0052FF] mb-1">
+          <span class="text-xs font-medium text-slate-500">Galeri Kegiatan</span>
+          <mat-icon class="text-lg">photo_library</mat-icon>
+        </div>
+        <div class="text-2xl font-black text-slate-900 font-mono">
+          {{ galleryItems().length }}
+        </div>
+        <div class="text-[11px] text-slate-400 mt-0.5 truncate">
+          Dokumentasi Kegiatan
+        </div>
+      </button>
+
+    </div>
+    
+    <!-- Management Segmented Navigation Tabs (Selaras dengan Menu Web: Beranda, Profile Sekolah, Galeri, & Data Guru) -->
+    <div class="flex items-center gap-2 p-1.5 bg-white rounded-2xl border border-slate-200 shadow-xs mb-8 overflow-x-auto">
+      
+      <!-- Tab 1: Beranda -->
+      <button
+        type="button"
+        (click)="setTab('beranda')"
+        [class]="activeTab() === 'beranda' 
+          ? 'px-4 py-2.5 text-xs font-bold rounded-xl bg-[#0052FF] text-white shadow-xs cursor-pointer whitespace-nowrap shrink-0 flex items-center gap-1.5' 
+          : 'px-4 py-2.5 text-xs font-medium rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-50 cursor-pointer whitespace-nowrap shrink-0 flex items-center gap-1.5'"
+      >
+        <mat-icon class="text-sm">home</mat-icon>
+        <span>Beranda (Foto, Profil & Data Siswa)</span>
+      </button>
+
+      <!-- Tab 2: Sambutan Kepala Sekolah -->
+      <button
+        type="button"
+        (click)="setTab('sambutan')"
+        [class]="activeTab() === 'sambutan' 
+          ? 'px-4 py-2.5 text-xs font-bold rounded-xl bg-[#0052FF] text-white shadow-xs cursor-pointer whitespace-nowrap shrink-0 flex items-center gap-1.5' 
+          : 'px-4 py-2.5 text-xs font-medium rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-50 cursor-pointer whitespace-nowrap shrink-0 flex items-center gap-1.5'"
+      >
+        <mat-icon class="text-sm">record_voice_over</mat-icon>
+        <span>Sambutan Kepala Sekolah (Menu Profil)</span>
+      </button>
+
+      <!-- Tab 3: Profile Sekolah -->
+      <button
+        type="button"
+        (click)="setTab('profile')"
+        [class]="activeTab() === 'profile' 
+          ? 'px-4 py-2.5 text-xs font-bold rounded-xl bg-[#0052FF] text-white shadow-xs cursor-pointer whitespace-nowrap shrink-0 flex items-center gap-1.5' 
+          : 'px-4 py-2.5 text-xs font-medium rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-50 cursor-pointer whitespace-nowrap shrink-0 flex items-center gap-1.5'"
+      >
+        <mat-icon class="text-sm">account_balance</mat-icon>
+        <span>Identitas Sekolah & Kontak</span>
+      </button>
+
+      <!-- Tab 4: Tenaga Pendidik -->
+      <button
+        type="button"
+        (click)="setTab('teachers')"
+        [class]="activeTab() === 'teachers' 
+          ? 'px-4 py-2.5 text-xs font-bold rounded-xl bg-[#0052FF] text-white shadow-xs cursor-pointer whitespace-nowrap shrink-0 flex items-center gap-1.5' 
+          : 'px-4 py-2.5 text-xs font-medium rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-50 cursor-pointer whitespace-nowrap shrink-0 flex items-center gap-1.5'"
+      >
+        <mat-icon class="text-sm">groups</mat-icon>
+        <span>Tenaga Pendidik ({{ teachers().length }})</span>
+      </button>
+
+      <!-- Tab 5: Galeri -->
+      <button
+        type="button"
+        (click)="setTab('gallery')"
+        [class]="activeTab() === 'gallery' 
+          ? 'px-4 py-2.5 text-xs font-bold rounded-xl bg-[#0052FF] text-white shadow-xs cursor-pointer whitespace-nowrap shrink-0 flex items-center gap-1.5' 
+          : 'px-4 py-2.5 text-xs font-medium rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-50 cursor-pointer whitespace-nowrap shrink-0 flex items-center gap-1.5'"
+      >
+        <mat-icon class="text-sm">photo_library</mat-icon>
+        <span>Galeri Foto ({{ galleryItems().length }})</span>
+      </button>
+
+    </div>
+
+    <!-- TAB 1: PENGATURAN BERANDA (SAMBUTAN KEPALA SEKOLAH & 4 METRIK DATA SISWA) -->
+    @if (activeTab() === 'beranda') {
+      <div class="space-y-8 animate-fadeIn">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm">
+          
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
+            <div>
+              <div class="inline-flex items-center gap-1.5 text-xs font-bold text-[#0052FF] uppercase tracking-wider mb-1">
+                <mat-icon class="text-sm">web</mat-icon>
+                <span>Konten Halaman Depan Beranda</span>
+              </div>
+              <h2 class="text-lg sm:text-xl font-black text-slate-900">
+                Pengaturan Beranda: Foto Sekolahan, Profil Singkat & Data Siswa
+              </h2>
+              <p class="text-xs text-slate-500 mt-0.5">
+                Perubahan pada formulir ini akan langsung tersimpan permanen dan tampil di halaman <code class="text-[#0052FF] bg-blue-50 px-1.5 py-0.5 rounded font-mono">/beranda</code>.
+              </p>
+            </div>
+
+            <a
+              routerLink="/beranda"
+              class="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-[#0052FF] bg-blue-50 hover:bg-blue-100 rounded-xl transition-colors shrink-0"
+            >
+              <mat-icon class="text-sm">visibility</mat-icon>
+              <span>Pratinjau Live Beranda</span>
+            </a>
+          </div>
+
+          <form [formGroup]="berandaForm" (ngSubmit)="saveBeranda()" class="space-y-8">
+            
+            <!-- 1. Form Foto Sekolahan & Profil Singkat Sekolah -->
+            <div class="p-6 rounded-2xl bg-blue-50/40 border border-blue-100 space-y-6">
+              <div class="flex items-center justify-between border-b border-blue-100/80 pb-3">
+                <div class="flex items-center gap-2 text-[#0052FF] font-bold text-sm">
+                  <mat-icon>photo_camera</mat-icon>
+                  <span>1. Foto Sekolahan & Profil Singkat Sekolah</span>
+                </div>
+                <span class="text-[11px] font-semibold text-slate-500">Tampil di Bagian Atas Beranda</span>
+              </div>
+
+              <!-- Foto Sekolahan Input & Live Preview -->
+              <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                <div class="lg:col-span-8 space-y-4">
+                  <div>
+                    <label for="schoolPhotoInput" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                      URL Foto Gedung / Kampus Sekolahan *
+                    </label>
+                    <input
+                      id="schoolPhotoInput"
+                      type="text"
+                      formControlName="schoolPhotoUrl"
+                      placeholder="/images/hero_smp_campus_1791853846114.jpg atau https://..."
+                      class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0052FF] font-mono"
+                    />
+                    <p class="text-[11px] text-slate-500 mt-1.5">
+                      Gunakan foto beresolusi tinggi tampilan depan gedung sekolah atau lingkungan kampus.
+                    </p>
+                  </div>
+
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label for="taglineInputBeranda" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                        Slogan / Tagline Sekolah *
+                      </label>
+                      <input
+                        id="taglineInputBeranda"
+                        type="text"
+                        formControlName="tagline"
+                        class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0052FF]"
+                      />
+                    </div>
+                    <div>
+                      <label for="mottoInputBeranda" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                        Motto Sekolah *
+                      </label>
+                      <input
+                        id="mottoInputBeranda"
+                        type="text"
+                        formControlName="motto"
+                        class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0052FF]"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label for="shortDescInputBeranda" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                      Teks Profil Singkat Sekolah (Tampil di Beranda) *
+                    </label>
+                    <textarea
+                      id="shortDescInputBeranda"
+                      formControlName="shortDescription"
+                      rows="4"
+                      class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0052FF] leading-relaxed"
+                      placeholder="Tuliskan profil singkat sekolah, visi utama, keunggulan dan komitmen pendidikan..."
+                    ></textarea>
+                    <p class="text-[11px] text-slate-400 mt-1">
+                      Deskripsi ringkas yang langsung dibaca pengunjung pada bagian awal halaman beranda.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Preview Foto Gedung Sekolahan -->
+                <div class="lg:col-span-4 bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs">
+                  <div class="text-xs font-bold text-slate-800 mb-2 flex items-center justify-between">
+                    <span>Pratinjau Foto Sekolahan</span>
+                    <span class="text-[10px] text-[#0052FF] bg-blue-50 px-2 py-0.5 rounded-full font-semibold">Tampil di Beranda</span>
+                  </div>
+                  <div class="rounded-xl overflow-hidden border border-slate-200 bg-slate-100 aspect-[16/10] relative">
+                    <img
+                      [src]="berandaForm.get('schoolPhotoUrl')?.value || profile().schoolPhotoUrl || '/images/hero_smp_campus_1791853846114.jpg'"
+                      alt="Pratinjau Gedung Sekolahan"
+                      class="w-full h-full object-cover"
+                      referrerpolicy="no-referrer"
+                    />
+                  </div>
+                  <div class="mt-2 text-[11px] text-slate-500">
+                    <span class="block font-medium text-slate-700">{{ profile().name }}</span>
+                    <span>{{ profile().city }}</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- 2. Form Data Pokok Pendidikan (4 Metrik Utama) -->
+            <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-6">
+              <div class="flex items-center justify-between border-b border-slate-200/80 pb-3">
+                <div class="flex items-center gap-2 text-slate-900 font-bold text-sm">
+                  <mat-icon class="text-[#0052FF]">analytics</mat-icon>
+                  <span>2. Data Pokok Pendidikan (4 Metrik Statistik di Beranda)</span>
+                </div>
+                <span class="text-[11px] font-semibold text-slate-500">Jumlah Siswa · Rombel · Guru · Tenaga Pendidik</span>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                
+                <!-- Metrik 1: Siswa -->
+                <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs space-y-3">
+                  <div class="flex items-center justify-between text-[#0052FF]">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-700">Jumlah Siswa</span>
+                    <mat-icon class="text-base">school</mat-icon>
+                  </div>
+                  <div>
+                    <label for="inTotalStudents" class="block text-[11px] font-semibold text-slate-500 mb-1">Total Keseluruhan *</label>
+                    <input
+                      id="inTotalStudents"
+                      type="number"
+                      formControlName="totalStudents"
+                      class="w-full px-3 py-2 bg-blue-50/50 border border-blue-200 rounded-xl text-base font-black text-[#0052FF] font-mono focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0052FF]"
+                    />
+                  </div>
+                  <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-100">
+                    <div>
+                      <label for="inMaleStudents" class="block text-[10px] text-slate-500 font-medium">Siswa Putra</label>
+                      <input id="inMaleStudents" type="number" formControlName="maleStudents" class="w-full px-2 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs font-mono font-semibold" />
+                    </div>
+                    <div>
+                      <label for="inFemaleStudents" class="block text-[10px] text-slate-500 font-medium">Siswi Putri</label>
+                      <input id="inFemaleStudents" type="number" formControlName="femaleStudents" class="w-full px-2 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs font-mono font-semibold" />
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Metrik 2: Rombel -->
+                <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs space-y-3">
+                  <div class="flex items-center justify-between text-[#0052FF]">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-700">Jumlah Rombel</span>
+                    <mat-icon class="text-base">meeting_room</mat-icon>
+                  </div>
+                  <div>
+                    <label for="inTotalRombel" class="block text-[11px] font-semibold text-slate-500 mb-1">Total Kelas Rombel *</label>
+                    <input
+                      id="inTotalRombel"
+                      type="number"
+                      formControlName="totalRombel"
+                      class="w-full px-3 py-2 bg-blue-50/50 border border-blue-200 rounded-xl text-base font-black text-[#0052FF] font-mono focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0052FF]"
+                    />
+                  </div>
+                  <div class="grid grid-cols-3 gap-1.5 pt-2 border-t border-slate-100">
+                    <div>
+                      <label for="inRombel7" class="block text-[10px] text-slate-500 font-medium">Kelas VII</label>
+                      <input id="inRombel7" type="number" formControlName="rombelClass7" class="w-full px-1.5 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs font-mono font-semibold text-center" />
+                    </div>
+                    <div>
+                      <label for="inRombel8" class="block text-[10px] text-slate-500 font-medium">Kelas VIII</label>
+                      <input id="inRombel8" type="number" formControlName="rombelClass8" class="w-full px-1.5 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs font-mono font-semibold text-center" />
+                    </div>
+                    <div>
+                      <label for="inRombel9" class="block text-[10px] text-slate-500 font-medium">Kelas IX</label>
+                      <input id="inRombel9" type="number" formControlName="rombelClass9" class="w-full px-1.5 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs font-mono font-semibold text-center" />
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Metrik 3: Guru -->
+                <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs space-y-3">
+                  <div class="flex items-center justify-between text-[#0052FF]">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-700">Jumlah Guru</span>
+                    <mat-icon class="text-base">groups</mat-icon>
+                  </div>
+                  <div>
+                    <label for="inTotalTeachers" class="block text-[11px] font-semibold text-slate-500 mb-1">Total Guru Pendidik *</label>
+                    <input
+                      id="inTotalTeachers"
+                      type="number"
+                      formControlName="totalTeachers"
+                      class="w-full px-3 py-2 bg-blue-50/50 border border-blue-200 rounded-xl text-base font-black text-[#0052FF] font-mono focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0052FF]"
+                    />
+                  </div>
+                  <div class="pt-2 border-t border-slate-100">
+                    <label for="inCertifiedTeachers" class="block text-[10px] text-slate-500 font-medium">Guru Tersertifikasi Pendidik</label>
+                    <input
+                      id="inCertifiedTeachers"
+                      type="number"
+                      formControlName="certifiedTeachers"
+                      class="w-full px-2 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs font-mono font-semibold"
+                    />
+                  </div>
+                </div>
+
+                <!-- Metrik 4: Tenaga Kependidikan -->
+                <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs space-y-3">
+                  <div class="flex items-center justify-between text-[#0052FF]">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-700">Tenaga Kependidikan</span>
+                    <mat-icon class="text-base">badge</mat-icon>
+                  </div>
+                  <div>
+                    <label for="inTotalEduStaff" class="block text-[11px] font-semibold text-slate-500 mb-1">Total Staf & TU *</label>
+                    <input
+                      id="inTotalEduStaff"
+                      type="number"
+                      formControlName="totalEducationalStaff"
+                      class="w-full px-3 py-2 bg-blue-50/50 border border-blue-200 rounded-xl text-base font-black text-[#0052FF] font-mono focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0052FF]"
+                    />
+                  </div>
+                  <div class="pt-2 border-t border-slate-100 text-[10px] text-slate-500 leading-tight">
+                    Mendukung kelancaran tata usaha, laboratorium, dan layanan siswa
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Tombol Simpan Beranda -->
+            <div class="pt-4 border-t border-slate-200 flex items-center justify-end gap-3">
+              <a
+                routerLink="/beranda"
+                class="px-4 py-2.5 text-xs font-semibold text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors"
+              >
+                Batal / Lihat Beranda
+              </a>
+              <button
+                type="submit"
+                class="inline-flex items-center gap-2 px-6 py-2.5 text-xs sm:text-sm font-bold text-white bg-[#0052FF] hover:bg-[#0043d6] active:scale-98 rounded-xl shadow-xs shadow-blue-500/25 transition-all cursor-pointer"
+              >
+                <mat-icon class="text-base">save</mat-icon>
+                <span>Simpan Perubahan Beranda</span>
+              </button>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    }
+
+    <!-- TAB 2: PENGATURAN SAMBUTAN KEPALA SEKOLAH (TAMPIL DI MENU PROFIL SEKOLAH) -->
+    @if (activeTab() === 'sambutan') {
+      <div class="space-y-8 animate-fadeIn">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm">
+          
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
+            <div>
+              <div class="inline-flex items-center gap-1.5 text-xs font-bold text-[#0052FF] uppercase tracking-wider mb-1">
+                <mat-icon class="text-sm">record_voice_over</mat-icon>
+                <span>Menu Profil Sekolah</span>
+              </div>
+              <h2 class="text-lg sm:text-xl font-black text-slate-900">
+                Pengaturan Sambutan Resmi Kepala Sekolah
+              </h2>
+              <p class="text-xs text-slate-500 mt-0.5">
+                Sambutan kepala sekolah ditampilkan secara khusus dan terhormat di halaman menu <code class="text-[#0052FF] bg-blue-50 px-1.5 py-0.5 rounded font-mono">/profil-sekolah</code>.
+              </p>
+            </div>
+
+            <a
+              routerLink="/profil-sekolah"
+              class="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-[#0052FF] bg-blue-50 hover:bg-blue-100 rounded-xl transition-colors shrink-0"
+            >
+              <mat-icon class="text-sm">visibility</mat-icon>
+              <span>Pratinjau di Menu Profil Sekolah</span>
+            </a>
+          </div>
+
+          <form [formGroup]="sambutanForm" (ngSubmit)="saveSambutan()" class="space-y-6">
+            
+            <div class="p-6 rounded-2xl bg-blue-50/40 border border-blue-100 space-y-6">
+              
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div>
+                  <label for="principalNameInputSambutan" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                    Nama Kepala Sekolah & Gelar Akademik *
+                  </label>
+                  <input
+                    id="principalNameInputSambutan"
+                    type="text"
+                    formControlName="principalName"
+                    class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0052FF] font-semibold"
+                  />
+                </div>
+
+                <div>
+                  <label for="principalTitleInputSambutan" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                    Jabatan Resmi Kepala Sekolah *
+                  </label>
+                  <input
+                    id="principalTitleInputSambutan"
+                    type="text"
+                    formControlName="principalTitle"
+                    class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0052FF]"
+                  />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
+                <div class="md:col-span-2">
+                  <label for="principalPhotoInputSambutan" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                    URL Foto Portrait Kepala Sekolah (URL Gambar) *
+                  </label>
+                  <input
+                    id="principalPhotoInputSambutan"
+                    type="text"
+                    formControlName="principalPhotoUrl"
+                    placeholder="https://images.unsplash.com/..."
+                    class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0052FF] font-mono"
+                  />
+                  <p class="text-[11px] text-slate-400 mt-1">
+                    Gunakan tautan foto berorientasi portrait atau foto formal kepala sekolah.
+                  </p>
+                </div>
+
+                <!-- Preview Foto Thumbnail -->
+                <div class="bg-white p-3 rounded-2xl border border-slate-200 flex items-center gap-3">
+                  <div class="w-16 h-20 rounded-xl bg-slate-100 overflow-hidden shrink-0 border border-slate-200">
+                    <img
+                      [src]="sambutanForm.get('principalPhotoUrl')?.value || profile().principalPhotoUrl"
+                      alt="Pratinjau Kepala Sekolah"
+                      class="w-full h-full object-cover"
+                      referrerpolicy="no-referrer"
+                    />
+                  </div>
+                  <div class="text-[11px] text-slate-500">
+                    <span class="block font-bold text-slate-800">Pratinjau Foto</span>
+                    <span>Tampil di Menu Profil Sekolah</span>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <label for="principalWelcomeInputSambutan" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                  Teks Sambutan Lengkap Kepala Sekolah *
+                </label>
+                <textarea
+                  id="principalWelcomeInputSambutan"
+                  formControlName="principalWelcome"
+                  rows="9"
+                  class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0052FF] leading-relaxed"
+                ></textarea>
+                <p class="text-[11px] text-slate-400 mt-1">
+                  Teks sambutan menyambut santri, orang tua/wali murid, dan masyarakat pendidikan di SMP Al Muttaqin.
+                </p>
+              </div>
+
+            </div>
+
+            <!-- Tombol Simpan Sambutan -->
+            <div class="pt-4 border-t border-slate-200 flex items-center justify-end gap-3">
+              <a
+                routerLink="/profil-sekolah"
+                class="px-4 py-2.5 text-xs font-semibold text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors"
+              >
+                Lihat di Profil Sekolah
+              </a>
+              <button
+                type="submit"
+                class="inline-flex items-center gap-2 px-6 py-2.5 text-xs sm:text-sm font-bold text-white bg-[#0052FF] hover:bg-[#0043d6] active:scale-98 rounded-xl shadow-xs shadow-blue-500/25 transition-all cursor-pointer"
+              >
+                <mat-icon class="text-base">save</mat-icon>
+                <span>Simpan Sambutan Kepala Sekolah</span>
+              </button>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    }
+
+    <!-- TAB 3: PROFILE SEKOLAH & KONTAK -->
+    @if (activeTab() === 'profile') {
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm animate-fadeIn">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
+          <div>
+            <div class="inline-flex items-center gap-1.5 text-xs font-bold text-[#0052FF] uppercase tracking-wider mb-1">
+              <mat-icon class="text-sm">account_balance</mat-icon>
+              <span>Halaman Profile Sekolah</span>
+            </div>
+            <h2 class="text-lg sm:text-xl font-black text-slate-900">
+              Pengaturan Identitas Sekolah & Informasi Kontak
+            </h2>
+            <p class="text-xs text-slate-500 mt-0.5">
+              Data resmi yang ditampilkan di halaman <code class="text-[#0052FF] bg-blue-50 px-1.5 py-0.5 rounded font-mono">/profil-sekolah</code> dan footer website.
+            </p>
+          </div>
+
+          <a
+            routerLink="/profil-sekolah"
+            class="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-[#0052FF] bg-blue-50 hover:bg-blue-100 rounded-xl transition-colors shrink-0"
+          >
+            <mat-icon class="text-sm">visibility</mat-icon>
+            <span>Lihat Profile Sekolah</span>
+          </a>
+        </div>
+
+        <form [formGroup]="profileForm" (ngSubmit)="saveProfileSekolah()" class="space-y-6">
+          
+          <!-- Identitas Satuan Pendidikan -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-4">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+              <mat-icon class="text-[#0052FF] text-base">verified</mat-icon>
+              <span>Identitas Resmi Satuan Pendidikan</span>
+            </h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div>
+                <label for="schoolNameInput" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                  Nama Lengkap Sekolah *
+                </label>
+                <input
+                  id="schoolNameInput"
+                  type="text"
+                  formControlName="name"
+                  class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0052FF] font-semibold"
+                />
+              </div>
+
+              <div>
+                <label for="schoolMottoInput" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                  Motto / Slogan Sekolah *
+                </label>
+                <input
+                  id="schoolMottoInput"
+                  type="text"
+                  formControlName="motto"
+                  class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0052FF]"
+                />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label for="accreditationInput" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                  Status Akreditasi *
+                </label>
+                <input
+                  id="accreditationInput"
+                  type="text"
+                  formControlName="accreditation"
+                  placeholder="Terakreditasi A (Unggul)"
+                  class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0052FF]"
+                />
+              </div>
+
+              <div>
+                <label for="npsnInput" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                  Nomor Pokok Sekolah Nasional (NPSN) *
+                </label>
+                <input
+                  id="npsnInput"
+                  type="text"
+                  formControlName="npsn"
+                  class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0052FF] font-mono font-semibold"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Informasi Kontak & Alamat -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-4">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+              <mat-icon class="text-[#0052FF] text-base">contact_phone</mat-icon>
+              <span>Informasi Kontak & Layanan Kampus</span>
+            </h3>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+              <div>
+                <label for="phoneInput" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                  Nomor Telepon Kantor *
+                </label>
+                <input
+                  id="phoneInput"
+                  type="text"
+                  formControlName="phone"
+                  class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0052FF] font-mono"
+                />
+              </div>
+
+              <div>
+                <label for="whatsappInput" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                  WhatsApp Resmi Sekolah *
+                </label>
+                <input
+                  id="whatsappInput"
+                  type="text"
+                  formControlName="whatsappFormatted"
+                  placeholder="0812-3456-7890"
+                  class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0052FF] font-mono"
+                />
+              </div>
+
+              <div>
+                <label for="emailInput" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                  Email Resmi Sekolah *
+                </label>
+                <input
+                  id="emailInput"
+                  type="email"
+                  formControlName="email"
+                  class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0052FF]"
+                />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div>
+                <label for="addressInput" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                  Alamat Lengkap Kampus *
+                </label>
+                <textarea
+                  id="addressInput"
+                  formControlName="address"
+                  rows="3"
+                  class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0052FF]"
+                ></textarea>
+              </div>
+
+              <div>
+                <label for="operatingHoursInput" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                  Jam Operasional Pelayanan Tata Usaha *
+                </label>
+                <textarea
+                  id="operatingHoursInput"
+                  formControlName="operatingHours"
+                  rows="3"
+                  class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0052FF]"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-slate-100 flex items-center justify-end gap-3">
+            <button
+              type="submit"
+              class="inline-flex items-center gap-2 px-6 py-2.5 text-xs sm:text-sm font-bold text-white bg-[#0052FF] hover:bg-[#0043d6] rounded-xl shadow-xs transition-colors cursor-pointer"
+            >
+              <mat-icon class="text-base">save</mat-icon>
+              <span>Simpan Profile Sekolah</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    }
+
+    <!-- TAB 3: TENAGA PENDIDIK & GURU -->
+    @if (activeTab() === 'teachers') {
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm animate-fadeIn">
+        
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
+          <div>
+            <div class="inline-flex items-center gap-1.5 text-xs font-bold text-[#0052FF] uppercase tracking-wider mb-1">
+              <mat-icon class="text-sm">groups</mat-icon>
+              <span>Dewan Guru & Pendidik</span>
+            </div>
+            <h2 class="text-lg sm:text-xl font-black text-slate-900">
+              Direktori Tenaga Pendidik (Guru)
+            </h2>
+            <p class="text-xs text-slate-500 mt-0.5">
+              Kelola data guru pengajar, kualifikasi akademik, mata pelajaran yang diampu, serta kutipan inspiratif.
+            </p>
+          </div>
+
+          <button
+            type="button"
+            (click)="openAddTeacherModal()"
+            class="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-bold text-white bg-[#0052FF] hover:bg-[#0043d6] active:scale-98 rounded-xl shadow-xs transition-all cursor-pointer self-start sm:self-auto"
+          >
+            <mat-icon class="text-base">person_add</mat-icon>
+            <span>Tambah Guru Baru</span>
+          </button>
+        </div>
+
+        <!-- Filter & Search Bar -->
+        <div class="flex flex-col sm:flex-row gap-3 mb-6">
+          <div class="flex-1 relative">
+            <input
+              type="text"
+              [value]="teacherSearchQuery()"
+              (input)="teacherSearchQuery.set($any($event.target).value)"
+              placeholder="Cari guru berdasarkan nama atau mata pelajaran..."
+              class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0052FF]"
+            />
+            <mat-icon class="absolute left-3 top-2.5 text-slate-400 text-base">search</mat-icon>
+          </div>
+
+          <div class="flex gap-2 overflow-x-auto pb-1">
+            @for (cat of ['ALL', 'PAI & Tahfidz', 'MIPA', 'Bahasa', 'Sosial & Seni', 'BK & Konseling']; track cat) {
+              <button
+                type="button"
+                (click)="teacherCategoryFilter.set(cat)"
+                [class]="teacherCategoryFilter() === cat
+                  ? 'px-3.5 py-2 text-xs font-bold bg-[#0052FF] text-white rounded-xl shadow-2xs whitespace-nowrap'
+                  : 'px-3.5 py-2 text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl whitespace-nowrap transition-colors'"
+              >
+                {{ cat === 'ALL' ? 'Semua Bidang' : cat }}
+              </button>
+            }
+          </div>
+        </div>
+
+        <!-- Grid Kartu Guru -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          @for (t of filteredTeachers(); track t.id) {
+            <div class="p-5 rounded-2xl border border-slate-200 bg-slate-50 flex flex-col justify-between hover:border-blue-200 hover:bg-white transition-all shadow-2xs">
+              <div class="space-y-3">
+                <div class="flex items-start gap-3.5">
+                  <div class="w-14 h-14 rounded-xl overflow-hidden bg-slate-200 shrink-0 border border-slate-300">
+                    <img [src]="t.photoUrl" [alt]="t.name" class="w-full h-full object-cover" referrerpolicy="no-referrer" />
+                  </div>
+                  <div>
+                    <h3 class="text-sm font-bold text-slate-900 leading-snug">{{ t.name }}</h3>
+                    <p class="text-xs font-semibold text-[#0052FF] mt-0.5">{{ t.subject }}</p>
+                    <span class="inline-block mt-1 px-2 py-0.5 text-[10px] font-bold rounded-md bg-blue-100 text-[#0052FF]">
+                      {{ t.category }}
+                    </span>
+                  </div>
+                </div>
+
+                <div class="text-[11px] text-slate-600 space-y-1 pt-2 border-t border-slate-200/70">
+                  <p><span class="font-semibold text-slate-700">Pendidikan:</span> {{ t.education }}</p>
+                  <p><span class="font-semibold text-slate-700">Pengalaman:</span> {{ t.experienceYears }} Tahun Mengajar</p>
+                  @if (t.quote) {
+                    <p class="italic text-slate-500 line-clamp-2">"{{ t.quote }}"</p>
+                  }
+                </div>
+              </div>
+
+              <div class="pt-3 mt-4 border-t border-slate-200 flex items-center justify-end gap-2">
+                <button
+                  type="button"
+                  (click)="openEditTeacherModal(t)"
+                  class="px-3 py-1.5 text-xs font-semibold text-slate-700 bg-white hover:bg-slate-100 border border-slate-200 rounded-lg transition-colors cursor-pointer flex items-center gap-1"
+                >
+                  <mat-icon class="text-xs">edit</mat-icon>
+                  <span>Edit</span>
+                </button>
+                <button
+                  type="button"
+                  (click)="deleteTeacher(t)"
+                  class="px-3 py-1.5 text-xs font-semibold text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-200 rounded-lg transition-colors cursor-pointer flex items-center gap-1"
+                >
+                  <mat-icon class="text-xs">delete</mat-icon>
+                  <span>Hapus</span>
+                </button>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+    <!-- TAB 4: GALERI FOTO KEGIATAN -->
+    @if (activeTab() === 'gallery') {
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm animate-fadeIn">
+        
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
+          <div>
+            <div class="inline-flex items-center gap-1.5 text-xs font-bold text-[#0052FF] uppercase tracking-wider mb-1">
+              <mat-icon class="text-sm">photo_library</mat-icon>
+              <span>Halaman Galeri Web</span>
+            </div>
+            <h2 class="text-lg sm:text-xl font-black text-slate-900">
+              Kelola Galeri Foto & Dokumentasi Kegiatan
+            </h2>
+            <p class="text-xs text-slate-500 mt-0.5">
+              Foto-foto yang tampil di menu <code class="text-[#0052FF] bg-blue-50 px-1.5 py-0.5 rounded font-mono">/galeri</code>. Tambah dokumentasi kegiatan atau hapus foto lama.
+            </p>
+          </div>
+
+          <div class="flex items-center gap-2 self-start sm:self-auto">
+            <a
+              routerLink="/galeri"
+              class="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold text-[#0052FF] bg-blue-50 hover:bg-blue-100 rounded-xl transition-colors"
+            >
+              <mat-icon class="text-sm">visibility</mat-icon>
+              <span>Lihat Galeri Web</span>
+            </a>
+            <button
+              type="button"
+              (click)="openAddGalleryModal()"
+              class="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-bold text-white bg-[#0052FF] hover:bg-[#0043d6] rounded-xl shadow-xs transition-colors cursor-pointer"
+            >
+              <mat-icon class="text-sm">add_photo_alternate</mat-icon>
+              <span>Tambah Foto Baru</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          @for (item of galleryItems(); track item.id) {
+            <div class="bg-slate-50 rounded-2xl overflow-hidden border border-slate-200 shadow-2xs flex flex-col justify-between hover:border-blue-200 hover:shadow-xs transition-all">
+              <div>
+                <div class="aspect-4/3 bg-slate-900 overflow-hidden relative group">
+                  <img [src]="item.imageUrl" [alt]="item.title" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" referrerpolicy="no-referrer" />
+                  <span class="absolute top-2 left-2 px-2.5 py-0.5 text-[10px] font-bold bg-[#0052FF] text-white rounded-md shadow-xs">
+                    {{ item.category }}
+                  </span>
+                </div>
+                <div class="p-4">
+                  <span class="text-[10px] text-slate-400 font-semibold block mb-0.5">{{ item.date }}</span>
+                  <h3 class="text-xs font-bold text-slate-900 line-clamp-1">{{ item.title }}</h3>
+                  <p class="text-[11px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">{{ item.description }}</p>
+                </div>
+              </div>
+
+              <div class="p-3 bg-white border-t border-slate-100 flex justify-end">
+                <button
+                  type="button"
+                  (click)="deleteGalleryItem(item)"
+                  class="px-2.5 py-1 text-xs font-semibold text-rose-700 bg-rose-50 hover:bg-rose-100 rounded-lg transition-colors cursor-pointer"
+                >
+                  Hapus Foto
+                </button>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+  </div>
+
+  <!-- Modal: Tambah / Edit Guru -->
+  @if (isTeacherModalOpen()) {
+    <div
+      role="dialog"
+      aria-modal="true"
+      tabindex="-1"
+      class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-fadeIn"
+      (keydown.escape)="closeTeacherModal()"
+    >
+      <button
+        type="button"
+        class="fixed inset-0 w-full h-full cursor-default bg-transparent border-0"
+        (click)="closeTeacherModal()"
+        aria-label="Tutup form guru"
+      ></button>
+
+      <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 relative z-10 max-h-[90vh] overflow-y-auto animate-scaleUp">
+        <div class="flex items-center justify-between mb-4 pb-2 border-b border-slate-100">
+          <div class="flex items-center gap-2 text-slate-900 font-bold text-base">
+            <mat-icon class="text-[#0052FF]">person</mat-icon>
+            <span>{{ editingTeacherId() ? 'Edit Data Tenaga Pendidik' : 'Tambah Tenaga Pendidik Baru' }}</span>
+          </div>
+          <button
+            type="button"
+            (click)="closeTeacherModal()"
+            class="p-2 text-slate-400 hover:text-slate-700 rounded-full cursor-pointer"
+            aria-label="Tutup"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+
+        <form [formGroup]="teacherForm" (ngSubmit)="saveTeacher()" class="space-y-4">
+          <div>
+            <label for="inputTeacherName" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+              Nama Lengkap & Gelar *
+            </label>
+            <input
+              id="inputTeacherName"
+              type="text"
+              formControlName="name"
+              placeholder="Contoh: Ustadz Ahmad Fauzi, S.Pd.I."
+              class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0052FF]"
+            />
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label for="inputTeacherTitle" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                Jabatan / Peran *
+              </label>
+              <input
+                id="inputTeacherTitle"
+                type="text"
+                formControlName="title"
+                placeholder="Guru Bidang Studi / Pembina"
+                class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0052FF]"
+              />
+            </div>
+
+            <div>
+              <label for="inputTeacherCategory" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                Kategori Mapel *
+              </label>
+              <select
+                id="inputTeacherCategory"
+                formControlName="category"
+                class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0052FF] cursor-pointer"
+              >
+                <option value="PAI & Tahfidz">PAI & Tahfidz</option>
+                <option value="MIPA">MIPA</option>
+                <option value="Bahasa">Bahasa</option>
+                <option value="Sosial & Seni">Sosial & Seni</option>
+                <option value="BK & Konseling">BK & Konseling</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label for="inputTeacherSubject" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                Mata Pelajaran Diampu *
+              </label>
+              <input
+                id="inputTeacherSubject"
+                type="text"
+                formControlName="subject"
+                placeholder="Contoh: Matematika / Tahsin"
+                class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0052FF]"
+              />
+            </div>
+
+            <div>
+              <label for="inputTeacherExp" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                Pengalaman (Tahun) *
+              </label>
+              <input
+                id="inputTeacherExp"
+                type="number"
+                formControlName="experienceYears"
+                min="0"
+                class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0052FF] font-mono"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label for="inputTeacherEdu" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+              Pendidikan Terakhir *
+            </label>
+            <input
+              id="inputTeacherEdu"
+              type="text"
+              formControlName="education"
+              placeholder="Contoh: S1 Pendidikan Agama Islam (UIN)"
+              class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0052FF]"
+            />
+          </div>
+
+          <div>
+            <label for="inputTeacherBio" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+              Biografi Singkat *
+            </label>
+            <textarea
+              id="inputTeacherBio"
+              formControlName="bio"
+              rows="2"
+              placeholder="Dedikasi dan pengalaman mengajar..."
+              class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0052FF]"
+            ></textarea>
+          </div>
+
+          <div>
+            <label for="inputTeacherQuote" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+              Motto Mengajar *
+            </label>
+            <input
+              id="inputTeacherQuote"
+              type="text"
+              formControlName="quote"
+              placeholder="Contoh: Belajar dengan hati, mendidik dengan nurani."
+              class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0052FF]"
+            />
+          </div>
+
+          <div>
+            <label for="inputTeacherPhoto" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+              URL Foto Pendidik
+            </label>
+            <input
+              id="inputTeacherPhoto"
+              type="text"
+              formControlName="photoUrl"
+              placeholder="https://..."
+              class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0052FF]"
+            />
+          </div>
+
+          <div class="pt-4 border-t border-slate-100 flex items-center justify-end gap-3">
+            <button
+              type="button"
+              (click)="closeTeacherModal()"
+              class="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-900 cursor-pointer"
+            >
+              Batal
+            </button>
+            <button
+              type="submit"
+              class="px-5 py-2 text-xs font-bold text-white bg-[#0052FF] hover:bg-[#0043d6] rounded-xl shadow-xs transition-colors cursor-pointer"
+            >
+              Simpan Data Guru
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  }
+
+  <!-- Modal: Tambah Foto Galeri -->
+  @if (isGalleryModalOpen()) {
+    <div
+      role="dialog"
+      aria-modal="true"
+      tabindex="-1"
+      class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-fadeIn"
+      (keydown.escape)="closeGalleryModal()"
+    >
+      <button
+        type="button"
+        class="fixed inset-0 w-full h-full cursor-default bg-transparent border-0"
+        (click)="closeGalleryModal()"
+        aria-label="Tutup form galeri"
+      ></button>
+
+      <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-slate-200 relative z-10 animate-scaleUp">
+        <div class="flex items-center justify-between mb-4 pb-2 border-b border-slate-100">
+          <div class="flex items-center gap-2 text-slate-900 font-bold text-base">
+            <mat-icon class="text-[#0052FF]">add_photo_alternate</mat-icon>
+            <span>Tambah Dokumentasi Foto Baru</span>
+          </div>
+          <button
+            type="button"
+            (click)="closeGalleryModal()"
+            class="p-2 text-slate-400 hover:text-slate-700 rounded-full cursor-pointer"
+            aria-label="Tutup"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+
+        <form [formGroup]="galleryForm" (ngSubmit)="saveGalleryItem()" class="space-y-4">
+          <div>
+            <label for="inputGalleryTitle" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+              Judul Kegiatan *
+            </label>
+            <input
+              id="inputGalleryTitle"
+              type="text"
+              formControlName="title"
+              placeholder="Contoh: Lomba Tahfidz Al-Qur'an Antar SMP"
+              class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0052FF]"
+            />
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label for="inputGalleryCategory" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                Kategori *
+              </label>
+              <select
+                id="inputGalleryCategory"
+                formControlName="category"
+                class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0052FF] cursor-pointer"
+              >
+                <option value="Tahfidz & Ibadah">Tahfidz & Ibadah</option>
+                <option value="Sains & Robotik">Sains & Robotik</option>
+                <option value="Prestasi & Lomba">Prestasi & Lomba</option>
+                <option value="Akademik">Akademik</option>
+                <option value="Ekstrakurikuler">Ekstrakurikuler</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="inputGalleryDate" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                Bulan & Tahun *
+              </label>
+              <input
+                id="inputGalleryDate"
+                type="text"
+                formControlName="date"
+                placeholder="Contoh: Oktober 2026"
+                class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0052FF]"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label for="inputGalleryDesc" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+              Deskripsi Singkat *
+            </label>
+            <textarea
+              id="inputGalleryDesc"
+              formControlName="description"
+              rows="2"
+              placeholder="Momen kegiatan santri..."
+              class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0052FF]"
+            ></textarea>
+          </div>
+
+          <div>
+            <label for="inputGalleryImg" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+              Path / URL Foto *
+            </label>
+            <input
+              id="inputGalleryImg"
+              type="text"
+              formControlName="imageUrl"
+              placeholder="/src/assets/images/... atau https://..."
+              class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0052FF] font-mono"
+            />
+          </div>
+
+          <div class="pt-4 border-t border-slate-100 flex items-center justify-end gap-3">
+            <button
+              type="button"
+              (click)="closeGalleryModal()"
+              class="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-900 cursor-pointer"
+            >
+              Batal
+            </button>
+            <button
+              type="submit"
+              class="px-5 py-2 text-xs font-bold text-white bg-[#0052FF] hover:bg-[#0043d6] rounded-xl shadow-xs transition-colors cursor-pointer"
+            >
+              Simpan Foto
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  }
+
+</div>

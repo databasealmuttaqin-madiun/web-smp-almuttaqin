@@ -1,0 +1,96 @@
+<!-- Header Navigation Bar (Modern & Clean, Al Maghfiroh Reference Style) -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md text-slate-800 shadow-xs border-b border-slate-200/80 transition-all duration-300">
+  <div class="max-w-full px-6 sm:px-10 lg:px-16">
+    <div class="flex items-center justify-between gap-6 h-[76px]">
+      
+      <!-- School Wordmark & Crest -->
+      <a routerLink="/beranda" (click)="closeMenu()" class="flex items-center gap-3 group whitespace-nowrap shrink-0">
+        <!-- Modern Crest Badge -->
+        <div class="w-11 h-11 rounded-xl bg-slate-900 text-white flex items-center justify-center font-bold text-lg shadow-sm group-hover:scale-105 transition-all">
+          <mat-icon class="text-2xl">school</mat-icon>
+        </div>
+        <div>
+          <span class="block font-black text-base sm:text-lg tracking-tight text-slate-900 group-hover:text-slate-700 transition-colors leading-tight">
+            {{ profile().name || 'SMP AL MUTTAQIN' }}
+          </span>
+          <span class="block text-[11px] font-bold text-slate-500 tracking-widest uppercase">
+            {{ profile().city || 'KOTA MADIUN' }}
+          </span>
+        </div>
+      </a>
+
+      <!-- Primary Navigation Links: Beranda, Profile Sekolah, Galeri -->
+      <nav class="hidden md:flex items-center gap-1.5 lg:gap-2 text-sm font-semibold">
+        <a
+          routerLink="/beranda"
+          [routerLinkActiveOptions]="{exact: true}"
+          routerLinkActive="bg-slate-100 text-slate-900 font-bold border border-slate-300/70 shadow-xs"
+          class="px-4 py-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-all whitespace-nowrap"
+        >
+          Beranda
+        </a>
+        <a
+          routerLink="/profil-sekolah"
+          routerLinkActive="bg-slate-100 text-slate-900 font-bold border border-slate-300/70 shadow-xs"
+          class="px-4 py-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-all whitespace-nowrap"
+        >
+          Profile Sekolah
+        </a>
+        <a
+          routerLink="/galeri"
+          routerLinkActive="bg-slate-100 text-slate-900 font-bold border border-slate-300/70 shadow-xs"
+          class="px-4 py-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-all whitespace-nowrap"
+        >
+          Galeri
+        </a>
+      </nav>
+
+      <!-- Right Action Area: Mobile Toggle Only (Admin Login button removed as requested) -->
+      <div class="flex items-center gap-2.5 shrink-0">
+        <!-- Mobile hamburger toggle button -->
+        <button
+          type="button"
+          (click)="toggleMenu()"
+          class="md:hidden p-2 text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-xl transition-colors cursor-pointer"
+          aria-label="Buka menu navigasi"
+        >
+          <mat-icon>{{ isMobileMenuOpen() ? 'close' : 'menu' }}</mat-icon>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Mobile Dropdown Navigation Drawer -->
+  @if (isMobileMenuOpen()) {
+    <div class="md:hidden bg-white text-slate-800 border-b border-slate-200 px-4 pt-3 pb-5 shadow-2xl animate-fadeIn">
+      <nav class="flex flex-col space-y-1.5">
+        <a
+          routerLink="/beranda"
+          [routerLinkActiveOptions]="{exact: true}"
+          routerLinkActive="bg-slate-100 text-slate-900 font-bold border border-slate-300/70"
+          (click)="closeMenu()"
+          class="px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
+        >
+          Beranda
+        </a>
+        <a
+          routerLink="/profil-sekolah"
+          routerLinkActive="bg-slate-100 text-slate-900 font-bold border border-slate-300/70"
+          (click)="closeMenu()"
+          class="px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
+        >
+          Profile Sekolah
+        </a>
+        <a
+          routerLink="/galeri"
+          routerLinkActive="bg-slate-100 text-slate-900 font-bold border border-slate-300/70"
+          (click)="closeMenu()"
+          class="px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
+        >
+          Galeri
+        </a>
+      </nav>
+    </div>
+  }
+</header>

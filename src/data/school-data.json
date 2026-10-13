@@ -1,0 +1,203 @@
+{
+  "profile": {
+    "name": "SMP AL MUTTAQIN KOTA MADIUN",
+    "tagline": "Membentuk Generasi Berakhlak Mulia, Cerdas, dan Berprestasi",
+    "motto": "Religius, Berintegritas, Unggul dalam IPTEK & IMTAQ",
+    "accreditation": "Akreditasi A (Unggul)",
+    "npsn": "20534219",
+    "city": "Kota Madiun",
+    "address": "Jl. Mastrip No. 45, Mojorejo, Kec. Taman, Kota Madiun, Jawa Timur 63139",
+    "phone": "(0351) 462890",
+    "whatsapp": "6281234567890",
+    "whatsappFormatted": "+62 812-3456-7890",
+    "email": "databasealmuttaqin@gmail.com",
+    "operatingHours": "Senin - Jumat: 07.00 - 15.30 WIB | Sabtu: 07.30 - 12.00 WIB",
+    "schoolPhotoUrl": "/images/hero_smp_campus_1791853846114.jpg",
+    "shortDescription": "SMP Al Muttaqin Kota Madiun merupakan lembaga pendidikan menengah pertama Islam terpadu unggulan di Kota Madiun yang mengintegrasikan Kurikulum Merdeka Nasional dengan penguatan adab Islami, tahfidz Al-Qur'an, dan keunggulan sains-teknologi. Kami berkomitmen mewujudkan generasi cerdas, mandiri, berkarakter mulia, serta siap menyongsong masa depan dengan landasan iman dan takwa yang kokoh.",
+    "vision": "Mewujudkan Generasi Qur'ani yang Cerdas, Mandiri, Berakhlak Mulia, dan Unggul dalam IPTEK serta Berwawasan Lingkungan",
+    "missions": [
+      "Menyelenggarakan pembelajaran terpadu Kurikulum Merdeka dengan penguatan tahfidz Al-Qur'an dan akhlakul karimah.",
+      "Mengembangkan potensi sains, teknologi digital, dan riset ilmiah peserta didik secara optimal.",
+      "Membina kemandirian, kepemimpinan, dan kecakapan hidup (life skills) santri melalui program ekstrakurikuler komprehensif.",
+      "Menciptakan lingkungan kampus sekolah yang asri, religius, ramah anak, dan berwawasan lingkungan hidup."
+    ],
+    "principalName": "Drs. H. Ahmad Mustofa, M.Pd.I.",
+    "principalTitle": "Kepala Sekolah SMP Al Muttaqin Kota Madiun",
+    "principalPhotoUrl": "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80",
+    "principalWelcome": "Assalamu’alaikum Warahmatullahi Wabarakatuh.\n\nSelamat datang di portal resmi SMP Al Muttaqin Kota Madiun. Puji syukur ke hadirat Allah SWT yang senantiasa melimpahkan hidayah dan taufik-Nya bagi kita semua. SMP Al Muttaqin berkomitmen menyelenggarakan pendidikan menengah pertama yang memadukan Kurikulum Merdeka Nasional dengan penguatan adab Islami, tahfidz Al-Qur'an, pembiasaan ibadah harian, serta penguasaan sains dan teknologi digital modern.\n\nKami mendampingi setiap peserta didik agar berkembang secara utuh lahir dan batin, memiliki kecerdasan intelektual, kemandirian, dan berakhlakul karimah, siap menyongsong masa depan dengan bekal ilmu yang berkah dan bermanfaat bagi umat dan bangsa.\n\nWassalamu’alaikum Warahmatullahi Wabarakatuh.",
+    "studentStats": {
+      "totalStudents": 486,
+      "maleStudents": 254,
+      "femaleStudents": 232,
+      "totalRombel": 15,
+      "rombelClass7": 5,
+      "rombelClass8": 5,
+      "rombelClass9": 5,
+      "totalTeachers": 28,
+      "certifiedTeachers": 22,
+      "totalEducationalStaff": 10
+    },
+    "stats": [
+      { "label": "Jumlah Siswa", "value": "486", "sublabel": "254 Putra · 232 Putri" },
+      { "label": "Jumlah Rombel", "value": "15 Rombel", "sublabel": "Kelas VII, VIII, & IX" },
+      { "label": "Jumlah Guru", "value": "28 Guru", "sublabel": "Tenaga Pendidik Profesional" },
+      { "label": "Tenaga Kependidikan", "value": "10 Staf", "sublabel": "Tenaga Kependidikan & TU" }
+    ],
+    "facilities": [
+      {
+        "name": "Masjid Jami' Baitul Muttaqin",
+        "description": "Pusat pembinaan spiritual, shalat berjamaah 5 waktu, kajian hadits, dan halaqah tahfidz harian.",
+        "icon": "mosque"
+      },
+      {
+        "name": "Laboratorium Sains & Robotika",
+        "description": "Dilengkapi mikroskop digital, kit eksperimen fisika/biologi, dan mikrokontroler coding untuk siswa.",
+        "icon": "science"
+      },
+      {
+        "name": "Perpustakaan Digital & Ruang Baca",
+        "description": "Koleksi ribuan buku referensi umum, kitab kuning terjemahan, literatur sains, dan e-book interaktif.",
+        "icon": "menu_book"
+      },
+      {
+        "name": "Laboratorium Komputer Multimedia",
+        "description": "36 unit PC spesifikasi modern dengan jaringan serat optik untuk Asesmen Nasional dan kelas desain grafis.",
+        "icon": "computer"
+      },
+      {
+        "name": "Lapangan Olahraga Multifungsi",
+        "description": "Sarana futsal, basket, bulutangkis, serta arena latihan bela diri pencak silat dan tapak suci.",
+        "icon": "sports_soccer"
+      },
+      {
+        "name": "Kantin Sehat & UKS Terstandar",
+        "description": "Penyediaan konsumsi halal dan higienis serta layanan kesehatan pertama dengan perawat siaga.",
+        "icon": "health_and_safety"
+      }
+    ]
+  },
+  "teachers": [
+    {
+      "id": "t-1",
+      "name": "Ustadz H. Muhammad Ridwan, Lc., M.Ag.",
+      "title": "Koordinator Tahfidz & Guru PAI",
+      "subject": "Pendidikan Agama Islam & Al-Qur'an Hadits",
+      "category": "PAI & Tahfidz",
+      "education": "S1 Universitas Al-Azhar Kairo, S2 UIN Maliki",
+      "experienceYears": 12,
+      "bio": "Hafizh 30 Juz bersanad Riwayat Hafs 'an 'Ashim, berpengalaman membina santri tahfidz tingkat nasional.",
+      "quote": "Al-Qur'an adalah cahaya hidup dan penuntun budi pekerti terbaik.",
+      "photoUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "id": "t-2",
+      "name": "Dra. Hj. Nurul Hidayati, M.Pd.",
+      "title": "Guru Senior IPA Biologi",
+      "subject": "Ilmu Pengetahuan Alam Terpadu",
+      "category": "MIPA",
+      "education": "S1 Pendidikan Biologi UNY, S2 Manajemen Pendidikan Unesa",
+      "experienceYears": 18,
+      "bio": "Pembimbing olimpiade sains (OSN) yang mengintegrasikan tadabbur alam dan sains modern.",
+      "quote": "Sains membimbing kita mengagumi kebesaran Sang Pencipta semesta.",
+      "photoUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "id": "t-3",
+      "name": "Bambang Sudarmono, S.Si., M.Kom.",
+      "title": "Guru Matematika & Robotika",
+      "subject": "Matematika & Pemrograman Dasar",
+      "category": "MIPA",
+      "education": "S1 Matematika UNAIR, S2 Teknik Informatika ITS",
+      "experienceYears": 9,
+      "bio": "Pengembang media ajar gamifikasi dan instruktur ekstrakurikuler coding robotik.",
+      "quote": "Logika matematika melatih ketelitian dan kejujuran berpikir.",
+      "photoUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "id": "t-4",
+      "name": "Fathimah Azzahra, S.Pd., M.Hum.",
+      "title": "Guru Bahasa Inggris & Public Speaking",
+      "subject": "English for Islamic Communication",
+      "category": "Bahasa",
+      "education": "S1 Pendidikan Bahasa Inggris UM, S2 Linguistik Terapan UB",
+      "experienceYears": 8,
+      "bio": "Pembina English Morning Assembly dan klub pidato tiga bahasa.",
+      "quote": "Language is the gateway to global Da'wah and shared wisdom.",
+      "photoUrl": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "id": "t-5",
+      "name": "Ustadz Ahmad Fauzi, S.Pd.I.",
+      "title": "Guru Bahasa Arab & Tarikh Islam",
+      "subject": "Bahasa Arab Fusha & Sejarah Kebudayaan Islam",
+      "category": "Bahasa",
+      "education": "S1 Pendidikan Bahasa Arab UIN Maulana Malik Ibrahim",
+      "experienceYears": 7,
+      "bio": "Menerapkan metode muhadatsah interaktif dan kajian literatur Arab klasik.",
+      "quote": "Bahasa Arab adalah bahasa Al-Qur'an dan kunci peradaban Islam.",
+      "photoUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "id": "t-6",
+      "name": "Siti Rahmawati, S.Psi., Gr.",
+      "title": "Konselor Bimbingan Konseling (BK)",
+      "subject": "Bimbingan Karakter & Konseling Siswa",
+      "category": "BK & Konseling",
+      "education": "S1 Psikologi Pendidikan & Profesi Konselor UNESA",
+      "experienceYears": 10,
+      "bio": "Mendampingi tumbuh kembang emosional, minat bakat, dan kesehatan mental remaja.",
+      "quote": "Setiap anak adalah anugerah unik yang butuh didengar dengan hati.",
+      "photoUrl": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80"
+    }
+  ],
+  "galleryItems": [
+    {
+      "id": "g-1",
+      "title": "Wisuda Akbar Tahfidz Al-Qur'an Santri Angkatan VII",
+      "category": "Tahfidz & Ibadah",
+      "date": "September 2026",
+      "description": "Penganugerahan syahadah tahfidz kepada 64 santri penghafal 3 hingga 10 Juz bertempat di Hall Al Muttaqin.",
+      "imageUrl": "/src/assets/images/activity_tahfidz_quran_1791853846582.jpg"
+    },
+    {
+      "id": "g-2",
+      "title": "Praktikum Sains & Pengujian Mikroskop Digital di Laboratorium IPA",
+      "category": "Sains & Robotik",
+      "date": "Agustus 2026",
+      "description": "Eksplorasi sel jaringan tumbuhan dan uji kimia sederhana dalam pembelajaran Kurikulum Merdeka Terpadu.",
+      "imageUrl": "/src/assets/images/activity_science_lab_1791853847113.jpg"
+    },
+    {
+      "id": "g-3",
+      "title": "Upacara Hari Pendidikan & Apresiasi Juara Olimpiade MIPA",
+      "category": "Prestasi & Lomba",
+      "date": "Mei 2026",
+      "description": "Penyerahan medali emas dan perak OSN Matematika serta penghargaan santri teladan Kota Madiun.",
+      "imageUrl": "/src/assets/images/activity_ceremony_achievement_1791853847278.jpg"
+    },
+    {
+      "id": "g-4",
+      "title": "Gerakan Shalat Dhuha & Pembacaan Al-Ma'tsurat Berjamaah",
+      "category": "Tahfidz & Ibadah",
+      "date": "Oktober 2026",
+      "description": "Pembiasaan ibadah harian pagi sebelum kegiatan belajar mengajar dimulai di Masjid Baitul Muttaqin.",
+      "imageUrl": "/src/assets/images/activity_tahfidz_quran_1791853846582.jpg"
+    },
+    {
+      "id": "g-5",
+      "title": "Pameran Karya Projek Penguatan Profil Pelajar Pancasila (P5)",
+      "category": "Akademik",
+      "date": "September 2026",
+      "description": "Pameran kewirausahaan santri, rekayasa teknologi ramah lingkungan, dan inovasi daur ulang sampah.",
+      "imageUrl": "/src/assets/images/hero_smp_campus_1791853846114.jpg"
+    },
+    {
+      "id": "g-6",
+      "title": "Latihan Kepemimpinan Santri & Outbound Pramuka SIT",
+      "category": "Ekstrakurikuler",
+      "date": "Juli 2026",
+      "description": "Penggemblengan kedisiplinan, survival skill, dan persaudaraan santri di Bumi Perkemahan Ngrowo Bening.",
+      "imageUrl": "/src/assets/images/activity_ceremony_achievement_1791853847278.jpg"
+    }
+  ]
+}

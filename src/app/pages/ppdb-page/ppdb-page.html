@@ -1,0 +1,33 @@
+<div>
+  <!-- Page Header Banner -->
+  <div class="bg-gradient-to-r from-emerald-950 via-emerald-900 to-slate-900 text-white py-14 lg:py-16 border-b border-emerald-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" appScrollReveal>
+      
+      <!-- Breadcrumb -->
+      <nav class="flex items-center gap-2 text-xs text-emerald-300 font-medium mb-4">
+        <a routerLink="/beranda" class="hover:text-white transition-colors">Beranda</a>
+        <span aria-hidden="true" class="text-emerald-600">/</span>
+        <span class="text-white">Portal PPDB 2026/2027</span>
+      </nav>
+
+      <div class="flex flex-wrap items-center gap-3 mb-2">
+        <span class="px-3 py-1 rounded-full bg-amber-400 text-emerald-950 text-xs font-bold uppercase tracking-wider">
+          Pendaftaran Dibuka
+        </span>
+        <span class="text-xs text-emerald-300 font-medium">Tahun Ajaran 2026/2027</span>
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight [text-wrap:balance]">
+        Portal Resmi PPDB SMP Al Muttaqin Kota Madiun
+      </h1>
+      <p class="mt-3 text-base text-emerald-100/90 max-w-2xl leading-relaxed">
+        Penerimaan Peserta Didik Baru jalur reguler & prestasi. Simak jadwal gelombang, persyaratan dokumen, unduh brosur PDF, dan kirimkan formulir konsultasi pendaftaran.
+      </p>
+    </div>
+  </div>
+
+  <!-- PPDB Content with Scroll Reveal -->
+  <div appScrollReveal data-aos-delay="100">
+    <app-ppdb />
+  </div>
+</div>

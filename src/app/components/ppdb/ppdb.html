@@ -1,0 +1,557 @@
+<section id="ppdb" class="py-20 lg:py-28 bg-slate-50 border-b border-slate-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Section Header -->
+    <div class="max-w-3xl mb-16" appScrollReveal>
+      <p class="text-xs font-bold tracking-widest uppercase text-emerald-800 mb-2">
+        05. Portal Resmi PPDB 2026/2027
+      </p>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight [text-wrap:balance]">
+        Penerimaan Peserta Didik Baru SMP Al Muttaqin Kota Madiun
+      </h2>
+      <p class="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
+        Amankan kursi pendidikan terbaik untuk putra-putri Anda. Dapatkan informasi jadwal gelombang, berkas persyaratan, unduh brosur panduan resmi, dan konsultasikan bersama panitia.
+      </p>
+    </div>
+
+    <!-- Pilihan Jalur PPDB (Dual-Card Comparison Styled like AI Studio Upgrade Modal) -->
+    <div class="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-10 shadow-sm mb-16" appScrollReveal>
+      <div class="max-w-2xl mb-8">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200/80 text-xs font-semibold text-[#0052FF] mb-2">
+          <mat-icon class="text-sm">compare_arrows</mat-icon>
+          <span>Pilihan Jalur Pendaftaran</span>
+        </div>
+        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+          Pilih Jalur Belajar yang Sesuai untuk Putra-Putri Anda
+        </h3>
+        <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+          Dua jalur unggulan dengan fasilitas pembinaan komprehensif, kurikulum merdeka terpadu, dan pendampingan intensif.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
+        <!-- Card 1: Jalur Reguler Terpadu -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-2xs flex flex-col justify-between hover:border-blue-300 transition-all">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-blue-50 text-[#0052FF] flex items-center justify-center mb-5">
+              <mat-icon class="text-2xl">school</mat-icon>
+            </div>
+
+            <h4 class="text-xl font-bold text-slate-900 mb-1">Jalur Reguler Terpadu</h4>
+            <p class="text-xs font-semibold text-slate-500 mb-6">Kurikulum Merdeka Nasional · Full Day School</p>
+
+            <ul class="space-y-3.5 text-xs sm:text-sm text-slate-700">
+              <li class="flex items-start gap-3">
+                <mat-icon class="text-base text-[#0052FF] shrink-0 mt-0.5">check_circle</mat-icon>
+                <span>Pembelajaran berbasis proyek (P5) dan sains terpadu</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <mat-icon class="text-base text-[#0052FF] shrink-0 mt-0.5">check_circle</mat-icon>
+                <span>Tahsin & Tahfidz Al-Qur'an harian (Target 3 Juz)</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <mat-icon class="text-base text-[#0052FF] shrink-0 mt-0.5">check_circle</mat-icon>
+                <span>Ekstrakurikuler robotik, coding, dan olahraga lengkap</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <mat-icon class="text-base text-[#0052FF] shrink-0 mt-0.5">check_circle</mat-icon>
+                <span>Jam belajar efektif 07.00 - 15.30 WIB dengan makan siang sehat</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="mt-8 pt-6 border-t border-slate-100">
+            <button
+              type="button"
+              (click)="openWhatsAppPanitia()"
+              class="w-full inline-flex items-center justify-center gap-2 px-5 py-3 text-xs sm:text-sm font-bold text-[#0052FF] bg-blue-50 hover:bg-blue-100 rounded-xl transition-all cursor-pointer"
+            >
+              <span>Daftar Jalur Reguler</span>
+              <mat-icon class="text-sm">arrow_forward</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 2: Jalur Tahfidz & Boarding Eksklusif -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border-2 border-[#0052FF]/60 shadow-md flex flex-col justify-between relative overflow-hidden bg-gradient-to-b from-blue-50/20 to-white">
+          <div class="absolute top-4 right-4 bg-[#0052FF] text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">
+            Paling Diminati
+          </div>
+
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-[#0052FF] text-white flex items-center justify-center mb-5 shadow-sm">
+              <mat-icon class="text-2xl">auto_stories</mat-icon>
+            </div>
+
+            <h4 class="text-xl font-bold text-slate-900 mb-1">Jalur Tahfidz & Boarding</h4>
+            <p class="text-xs font-semibold text-[#0052FF] mb-6">Pesantren Asrama Terpadu · Target 5+ Juz</p>
+
+            <ul class="space-y-3.5 text-xs sm:text-sm text-slate-700">
+              <li class="flex items-start gap-3">
+                <mat-icon class="text-base text-[#0052FF] shrink-0 mt-0.5">check_circle</mat-icon>
+                <span>Bimbingan tahfidz intensif bersanad (Pagi & Malam)</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <mat-icon class="text-base text-[#0052FF] shrink-0 mt-0.5">check_circle</mat-icon>
+                <span>Pembinaan akhlak, bahasa Arab/Inggris harian, & qiyamul lail</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <mat-icon class="text-base text-[#0052FF] shrink-0 mt-0.5">check_circle</mat-icon>
+                <span>Fasilitas asrama santri representatif dan nyaman</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <mat-icon class="text-base text-[#0052FF] shrink-0 mt-0.5">check_circle</mat-icon>
+                <span>Prioritas beasiswa prestasi dan pendampingan olimpiade sains</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="mt-8 pt-6 border-t border-slate-100">
+            <button
+              type="button"
+              (click)="openWhatsAppPanitia()"
+              class="w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 text-xs sm:text-sm font-bold text-white bg-[#0052FF] hover:bg-[#0043d6] rounded-xl shadow-md transition-all cursor-pointer"
+            >
+              <span>Konsultasi Jalur Tahfidz</span>
+              <mat-icon class="text-sm">arrow_forward</mat-icon>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- PPDB Waves / Gelombang Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+      @for (wave of ppdbWaves(); track wave.id; let idx = $index) {
+        <div
+          appScrollReveal
+          [attr.data-aos-delay]="idx * 150"
+          [class]="wave.status === 'active' 
+            ? 'bg-gradient-to-br from-emerald-900 to-emerald-950 text-white rounded-3xl p-8 lg:p-10 shadow-lg border-2 border-emerald-600/40 relative overflow-hidden flex flex-col justify-between'
+            : 'bg-white text-slate-900 rounded-3xl p-8 lg:p-10 shadow-sm border border-slate-200 flex flex-col justify-between'"
+        >
+          <div>
+            <div class="flex items-center justify-between gap-4 mb-4">
+              <span
+                [class]="wave.status === 'active'
+                  ? 'text-xs font-bold uppercase tracking-wider text-amber-300'
+                  : 'text-xs font-bold uppercase tracking-wider text-slate-500'"
+              >
+                {{ wave.badgeText }}
+              </span>
+              <span
+                [class]="wave.status === 'active'
+                  ? 'text-xs font-bold text-emerald-200 tabular-nums font-mono'
+                  : 'text-xs font-medium text-slate-500 tabular-nums font-mono'"
+              >
+                {{ wave.quota }}
+              </span>
+            </div>
+
+            <h3
+              [class]="wave.status === 'active' ? 'text-2xl font-bold text-white mb-2' : 'text-2xl font-bold text-slate-900 mb-2'"
+            >
+              {{ wave.name }}
+            </h3>
+
+            <div
+              [class]="wave.status === 'active'
+                ? 'flex items-center gap-2 text-xs sm:text-sm text-emerald-200 mb-4'
+                : 'flex items-center gap-2 text-xs sm:text-sm text-slate-600 mb-4'"
+            >
+              <mat-icon class="text-base text-amber-400">calendar_today</mat-icon>
+              <span class="font-medium font-mono tabular-nums">{{ wave.period }}</span>
+            </div>
+
+            <p
+              [class]="wave.status === 'active' ? 'text-sm text-emerald-100/90 leading-relaxed mb-6' : 'text-sm text-slate-600 leading-relaxed mb-6'"
+            >
+              {{ wave.description }}
+            </p>
+
+            <!-- Benefits -->
+            <div
+              [class]="wave.status === 'active' ? 'pt-4 border-t border-emerald-800 space-y-2 mb-8' : 'pt-4 border-t border-slate-100 space-y-2 mb-8'"
+            >
+              <span
+                [class]="wave.status === 'active' ? 'block text-xs font-bold text-emerald-300 uppercase tracking-wider mb-2' : 'block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2'"
+              >
+                Fasilitas & Keuntungan:
+              </span>
+              @for (benefit of wave.benefits; track benefit) {
+                <div class="flex items-start gap-2.5 text-xs sm:text-sm">
+                  <mat-icon
+                    [class]="wave.status === 'active' ? 'text-base text-amber-400 shrink-0 mt-0.5' : 'text-base text-emerald-700 shrink-0 mt-0.5'"
+                  >
+                    done_all
+                  </mat-icon>
+                  <span [class]="wave.status === 'active' ? 'text-slate-100' : 'text-slate-700'">{{ benefit }}</span>
+                </div>
+              }
+            </div>
+          </div>
+
+          <!-- Wave Action -->
+          <div>
+            @if (wave.status === 'active') {
+              <button
+                type="button"
+                (click)="openWhatsAppPanitia()"
+                class="w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 text-xs sm:text-sm font-bold text-emerald-950 bg-amber-400 hover:bg-amber-300 active:scale-98 rounded-xl shadow-md transition-all cursor-pointer"
+              >
+                <mat-icon class="text-base">app_registration</mat-icon>
+                <span>Daftar Sekarang (WhatsApp Panitia)</span>
+              </button>
+            } @else {
+              <button
+                type="button"
+                (click)="openWhatsAppPanitia()"
+                class="w-full inline-flex items-center justify-center gap-2 px-5 py-3 text-xs sm:text-sm font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors cursor-pointer"
+              >
+                <mat-icon class="text-base">notifications</mat-icon>
+                <span>Narahubung & Notifikasi Gelombang II</span>
+              </button>
+            }
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Brosur PDF Digital & Download Banner -->
+    <div class="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200 shadow-sm mb-16 flex flex-col lg:flex-row items-center justify-between gap-8" appScrollReveal>
+      <div class="flex items-start sm:items-center gap-5">
+        <div class="w-16 h-16 rounded-2xl bg-amber-50 text-amber-700 flex items-center justify-center shrink-0 border border-amber-200">
+          <mat-icon class="text-3xl">picture_as_pdf</mat-icon>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-amber-700 uppercase tracking-wider">Dokumen Resmi Sekolah</span>
+          <h3 class="text-xl sm:text-2xl font-bold text-slate-900 mt-0.5">
+            Brosur Informasi & Panduan PPDB 2026/2027
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-600 mt-1 max-w-xl">
+            Berisi rincian kurikulum, tata tertib, tabel pembiayaan pendidikan transparan, panduan seragam, dan jadwal kegiatan awal tahun ajaran.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3 w-full lg:w-auto shrink-0">
+        <button
+          type="button"
+          (click)="openBrochure()"
+          class="flex-1 lg:flex-none inline-flex items-center justify-center gap-2 px-5 py-3 text-xs sm:text-sm font-semibold text-emerald-900 bg-emerald-50 hover:bg-emerald-100 rounded-xl transition-colors cursor-pointer"
+        >
+          <mat-icon class="text-base">visibility</mat-icon>
+          <span>Baca Brosur Digital</span>
+        </button>
+
+        <button
+          type="button"
+          (click)="downloadBrochure()"
+          class="flex-1 lg:flex-none inline-flex items-center justify-center gap-2 px-5 py-3 text-xs sm:text-sm font-semibold text-white bg-emerald-800 hover:bg-emerald-900 rounded-xl shadow-sm transition-colors cursor-pointer"
+        >
+          <mat-icon class="text-base">download</mat-icon>
+          <span>Unduh Berkas Brosur (.txt / PDF)</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Alur Pendaftaran (5-Step Flow) -->
+    <div class="mb-16" appScrollReveal>
+      <div class="max-w-2xl mb-8">
+        <span class="text-xs font-bold uppercase tracking-widest text-emerald-800">Tahapan Calon Santri</span>
+        <h3 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">
+          Alur Pendaftaran Mudah & Transparan
+        </h3>
+        <p class="text-sm text-slate-600 mt-1">
+          5 langkah terstruktur dari awal registrasi hingga resmi menjadi santri/siswa SMP Al Muttaqin.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+        @for (step of ppdbSteps(); track step.step; let idx = $index) {
+          <div
+            class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between hover:border-emerald-300 transition-colors"
+            appScrollReveal
+            [attr.data-aos-delay]="idx * 100"
+          >
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="w-8 h-8 rounded-xl bg-emerald-800 text-white font-bold text-xs flex items-center justify-center">
+                  {{ step.step }}
+                </span>
+                <mat-icon class="text-emerald-700 text-xl">{{ step.icon }}</mat-icon>
+              </div>
+              <h4 class="text-sm font-bold text-slate-900 mb-2 leading-snug">
+                {{ step.title }}
+              </h4>
+              <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                {{ step.description }}
+              </p>
+            </div>
+            <div class="pt-3 border-t border-slate-100 text-xs font-medium text-slate-500">
+              {{ step.timeline }}
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Persyaratan Dokumen & Kriteria -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16" appScrollReveal>
+      @for (req of ppdbRequirements(); track req.category) {
+        <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-800 flex items-center justify-center">
+              <mat-icon class="text-xl">checklist</mat-icon>
+            </div>
+            <h4 class="text-lg font-bold text-slate-900">
+              {{ req.category }}
+            </h4>
+          </div>
+
+          <ul class="space-y-3">
+            @for (item of req.items; track item) {
+              <li class="flex items-start gap-3 text-xs sm:text-sm text-slate-700">
+                <mat-icon class="text-base text-emerald-700 shrink-0 mt-0.5">check_circle</mat-icon>
+                <span>{{ item }}</span>
+              </li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
+
+    <!-- Kontak Panitia & Formulir Konsultasi Pendaftaran Cepat -->
+    <div class="bg-white rounded-3xl p-8 sm:p-10 lg:p-12 border border-slate-200 shadow-sm mb-16" appScrollReveal>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        
+        <!-- Left: Sekretariat Info -->
+        <div class="lg:col-span-5">
+          <span class="text-xs font-bold tracking-wider uppercase text-emerald-800">Layanan Calon Wali Murid</span>
+          <h3 class="text-2xl font-bold text-slate-900 mt-1 mb-4">
+            Pusat Bantuan & Sekretariat PPDB
+          </h3>
+          <p class="text-sm text-slate-600 leading-relaxed mb-6">
+            Ada pertanyaan tentang kurikulum, tes tahfidz, atau biaya pendidikan? Tim admisi kami siap memberikan pendampingan secara ramah dan profesional.
+          </p>
+
+          <div class="space-y-4 text-sm text-slate-700 mb-8">
+            <div class="flex items-start gap-3">
+              <mat-icon class="text-emerald-800 text-lg shrink-0 mt-0.5">place</mat-icon>
+              <div>
+                <span class="font-bold block text-slate-900">Alamat Kampus:</span>
+                <span>{{ profile().address }}</span>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <mat-icon class="text-emerald-800 text-lg shrink-0 mt-0.5">schedule</mat-icon>
+              <div>
+                <span class="font-bold block text-slate-900">Jam Layanan PPDB:</span>
+                <span>{{ profile().operatingHours }}</span>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <mat-icon class="text-emerald-800 text-lg shrink-0 mt-0.5">chat</mat-icon>
+              <div>
+                <span class="font-bold block text-slate-900">Hotline WhatsApp:</span>
+                <span class="font-mono text-emerald-800 font-semibold">{{ profile().whatsappFormatted }}</span>
+              </div>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            (click)="openWhatsAppPanitia()"
+            class="w-full inline-flex items-center justify-center gap-2.5 px-6 py-3.5 text-xs sm:text-sm font-semibold text-white bg-emerald-800 hover:bg-emerald-900 active:scale-98 rounded-xl shadow-sm transition-all cursor-pointer"
+          >
+            <mat-icon class="text-base">chat</mat-icon>
+            <span>Hubungi WhatsApp Panitia Sekarang</span>
+          </button>
+        </div>
+
+        <!-- Right: Inquiry / Consultation Form -->
+        <div class="lg:col-span-7 bg-slate-50 rounded-2xl p-6 sm:p-8 border border-slate-200">
+          <h4 class="text-lg font-bold text-slate-900 mb-1">
+            Formulir Konsultasi Calon Siswa Baru
+          </h4>
+          <p class="text-xs sm:text-sm text-slate-500 mb-6">
+            Isi data singkat berikut untuk tersambung langsung dengan panitia seleksi.
+          </p>
+
+          @if (isSubmitted()) {
+            <div class="p-6 rounded-xl bg-emerald-100/70 border border-emerald-200 text-center animate-fadeIn">
+              <mat-icon class="text-4xl text-emerald-800 mb-2">check_circle</mat-icon>
+              <h5 class="text-base font-bold text-emerald-900">Terima kasih atas minat Anda!</h5>
+              <p class="text-xs sm:text-sm text-emerald-800 mt-1">
+                Data Anda telah dicatat. Kami akan segera menghubungkan Anda ke WhatsApp Panitia PPDB SMP Al Muttaqin.
+              </p>
+              <button
+                type="button"
+                (click)="resetForm()"
+                class="mt-4 px-4 py-2 text-xs font-semibold text-emerald-800 bg-white rounded-lg border border-emerald-300 hover:bg-emerald-50 transition-colors cursor-pointer"
+              >
+                Kirim Formulir Baru
+              </button>
+            </div>
+          } @else {
+            <form [formGroup]="inquiryForm" (ngSubmit)="submitInquiry()" class="space-y-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="studentName" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                    Nama Calon Siswa *
+                  </label>
+                  <input
+                    id="studentName"
+                    type="text"
+                    formControlName="studentName"
+                    placeholder="Contoh: Muhammad Farhan"
+                    class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-700 transition-all"
+                  />
+                  @if (inquiryForm.get('studentName')?.touched && inquiryForm.get('studentName')?.invalid) {
+                    <span class="text-xs text-rose-600 mt-1 block">Nama calon siswa wajib diisi (min 3 huruf).</span>
+                  }
+                </div>
+
+                <div>
+                  <label for="parentName" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                    Nama Orang Tua / Wali *
+                  </label>
+                  <input
+                    id="parentName"
+                    type="text"
+                    formControlName="parentName"
+                    placeholder="Contoh: Bpk. Haryanto"
+                    class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-700 transition-all"
+                  />
+                  @if (inquiryForm.get('parentName')?.touched && inquiryForm.get('parentName')?.invalid) {
+                    <span class="text-xs text-rose-600 mt-1 block">Nama orang tua wajib diisi.</span>
+                  }
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="phone" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                    Nomor WhatsApp / HP Aktif *
+                  </label>
+                  <input
+                    id="phone"
+                    type="tel"
+                    formControlName="phone"
+                    placeholder="081234567xxx"
+                    class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-700 transition-all font-mono"
+                  />
+                  @if (inquiryForm.get('phone')?.touched && inquiryForm.get('phone')?.invalid) {
+                    <span class="text-xs text-rose-600 mt-1 block">Nomor WhatsApp wajib diisi (minimal 9 digit).</span>
+                  }
+                </div>
+
+                <div>
+                  <label for="schoolOrigin" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                    Asal Sekolah SD / MI *
+                  </label>
+                  <input
+                    id="schoolOrigin"
+                    type="text"
+                    formControlName="schoolOrigin"
+                    placeholder="Contoh: SD Islam / SDN 01 Madiun"
+                    class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-700 transition-all"
+                  />
+                  @if (inquiryForm.get('schoolOrigin')?.touched && inquiryForm.get('schoolOrigin')?.invalid) {
+                    <span class="text-xs text-rose-600 mt-1 block">Asal sekolah wajib diisi.</span>
+                  }
+                </div>
+              </div>
+
+              <div>
+                <label for="programInterest" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                  Pilihan Minat Program Unggulan
+                </label>
+                <select
+                  id="programInterest"
+                  formControlName="programInterest"
+                  class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-700 transition-all cursor-pointer"
+                >
+                  <option value="Tahfidz Intensif (Target 3-5 Juz)">Kelas Tahfidz Intensif Al-Qur'an</option>
+                  <option value="Kelas Sains & Olimpiade MIPA">Kelas Unggulan Sains & Riset</option>
+                  <option value="Bilingual English & Arabic">Kelas Komunikasi Bilingual</option>
+                  <option value="Reguler Terpadu">Kelas Reguler Terpadu</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="notes" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                  Pertanyaan Tambahan / Catatan Khusus
+                </label>
+                <textarea
+                  id="notes"
+                  formControlName="notes"
+                  rows="2"
+                  placeholder="Tuliskan jika ada pertanyaan khusus terkait beasiswa, asrama, dll."
+                  class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-700 transition-all resize-none"
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                class="w-full inline-flex items-center justify-center gap-2 px-6 py-3 text-xs sm:text-sm font-semibold text-emerald-950 bg-amber-400 hover:bg-amber-300 active:scale-98 rounded-xl shadow-md transition-all cursor-pointer mt-2"
+              >
+                <mat-icon class="text-base">send</mat-icon>
+                <span>Kirim & Hubungkan ke Panitia PPDB</span>
+              </button>
+            </form>
+          }
+        </div>
+
+      </div>
+    </div>
+
+    <!-- FAQ PPDB Accordion -->
+    <div appScrollReveal>
+      <div class="max-w-2xl mb-8">
+        <span class="text-xs font-bold uppercase tracking-widest text-emerald-800">Tanya Jawab</span>
+        <h3 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">
+          Pertanyaan yang Sering Diajukan (FAQ)
+        </h3>
+        <p class="text-sm text-slate-600 mt-1">
+          Informasi seputar sistem sekolah, kurikulum, tes masuk, dan pembiayaan.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        @for (faq of faqItems(); track faq.id) {
+          <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs transition-colors">
+            <button
+              type="button"
+              (click)="toggleFaq(faq.id)"
+              class="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 hover:bg-slate-50/70 transition-colors cursor-pointer"
+            >
+              <div class="flex items-center gap-3">
+                <span class="text-xs font-bold text-emerald-800">
+                  {{ faq.category }}
+                </span>
+                <span class="text-sm sm:text-base font-bold text-slate-900">
+                  {{ faq.question }}
+                </span>
+              </div>
+              <mat-icon class="text-slate-500 shrink-0 transition-transform duration-200" [class.rotate-180]="activeFaqId() === faq.id">
+                expand_more
+              </mat-icon>
+            </button>
+
+            @if (activeFaqId() === faq.id) {
+              <div class="px-5 pb-6 sm:px-6 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4 animate-fadeIn">
+                {{ faq.answer }}
+              </div>
+            }
+          </div>
+        }
+      </div>
+    </div>
+
+  </div>
+</section>

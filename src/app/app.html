@@ -1,0 +1,15 @@
+<div class="min-h-screen flex flex-col bg-white text-slate-800 antialiased selection:bg-[#0052FF] selection:text-white">
+  <!-- Frozen Fixed Header Bar -->
+  <app-header />
+
+  <!-- Main Routed Views Area with top padding matching the 80px fixed header -->
+  <main class="flex-1 pt-20">
+    <router-outlet />
+  </main>
+
+  <!-- Global Footer -->
+  <app-footer />
+
+  <!-- Global Brochure Digital Reader Modal -->
+  <app-brochure-modal />
+</div>

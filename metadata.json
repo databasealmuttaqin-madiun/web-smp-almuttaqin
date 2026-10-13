@@ -1,0 +1,6 @@
+{
+  "name": "SMP Al Muttaqin Kota Madiun",
+  "description": "Website Resmi dan Portal PPDB 2026/2027 SMP Al Muttaqin Kota Madiun - Membentuk Generasi Berakhlak Mulia, Cerdas, dan Berprestasi.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

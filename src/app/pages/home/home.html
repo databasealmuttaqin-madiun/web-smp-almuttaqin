@@ -1,0 +1,201 @@
+<div class="space-y-0 bg-white">
+  <!-- 1. Foto Sekolahan & Profil Singkat Sekolah -->
+  <app-hero />
+
+  <!-- 2. Data Siswa & Satuan Pendidikan (4 Metrik Utama) -->
+  <section id="data-sekolah" class="py-16 sm:py-20 bg-white border-b border-slate-100">
+    <div class="max-w-full px-6 sm:px-10 lg:px-16">
+      
+      <!-- Section Header -->
+      <div class="max-w-3xl mb-12" appScrollReveal>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200/80 text-xs font-semibold text-[#0052FF] mb-3">
+          <mat-icon class="text-sm">analytics</mat-icon>
+          <span>Data Pokok Satuan Pendidikan (Dapodik / EMIS)</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+          Data Siswa & Sumber Daya Sekolah
+        </h2>
+      </div>
+
+      <!-- 4 Metric Cards (Clean White, Electric Blue Accents) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        
+        <!-- Metric 1: Jumlah Siswa -->
+        <div
+          class="bg-white p-6 rounded-3xl border border-slate-200 shadow-xs hover:border-[#0052FF]/60 hover:shadow-md transition-all group"
+          appScrollReveal
+          data-aos-delay="50"
+        >
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-12 h-12 rounded-2xl bg-blue-50 text-[#0052FF] flex items-center justify-center group-hover:scale-105 transition-transform">
+              <mat-icon class="text-2xl">school</mat-icon>
+            </div>
+            <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full">
+              Aktif Belajar
+            </span>
+          </div>
+
+          <div class="space-y-1">
+            <span class="text-3xl sm:text-4xl font-extrabold text-[#0052FF] font-mono tracking-tight block">
+              {{ profile().studentStats?.totalStudents || 486 }}
+            </span>
+            <h3 class="text-base font-bold text-slate-900">Jumlah Siswa</h3>
+            <p class="text-xs text-slate-500">Total seluruh peserta didik aktif</p>
+          </div>
+
+          <div class="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-medium text-slate-600">
+            <span class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-[#0052FF]"></span>
+              <span>{{ profile().studentStats?.maleStudents || 254 }} Siswa Putra</span>
+            </span>
+            <span class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+              <span>{{ profile().studentStats?.femaleStudents || 232 }} Siswi Putri</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Metric 2: Jumlah Rombel -->
+        <div
+          class="bg-white p-6 rounded-3xl border border-slate-200 shadow-xs hover:border-[#0052FF]/60 hover:shadow-md transition-all group"
+          appScrollReveal
+          data-aos-delay="100"
+        >
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-12 h-12 rounded-2xl bg-blue-50 text-[#0052FF] flex items-center justify-center group-hover:scale-105 transition-transform">
+              <mat-icon class="text-2xl">meeting_room</mat-icon>
+            </div>
+            <span class="text-[11px] font-bold uppercase tracking-wider text-[#0052FF] bg-blue-50 px-2.5 py-1 rounded-full">
+              3 Tingkat Kelas
+            </span>
+          </div>
+
+          <div class="space-y-1">
+            <span class="text-3xl sm:text-4xl font-extrabold text-[#0052FF] font-mono tracking-tight block">
+              {{ profile().studentStats?.totalRombel || 15 }} Rombel
+            </span>
+            <h3 class="text-base font-bold text-slate-900">Jumlah Rombel</h3>
+            <p class="text-xs text-slate-500">Rombongan belajar ruang kelas</p>
+          </div>
+
+          <div class="mt-5 pt-4 border-t border-slate-100 grid grid-cols-3 gap-1 text-center text-xs">
+            <div class="p-1.5 bg-slate-50 rounded-lg">
+              <span class="block text-[10px] text-slate-400">Kls VII</span>
+              <span class="font-bold text-slate-800 font-mono">{{ profile().studentStats?.rombelClass7 || 5 }}</span>
+            </div>
+            <div class="p-1.5 bg-slate-50 rounded-lg">
+              <span class="block text-[10px] text-slate-400">Kls VIII</span>
+              <span class="font-bold text-slate-800 font-mono">{{ profile().studentStats?.rombelClass8 || 5 }}</span>
+            </div>
+            <div class="p-1.5 bg-slate-50 rounded-lg">
+              <span class="block text-[10px] text-slate-400">Kls IX</span>
+              <span class="font-bold text-slate-800 font-mono">{{ profile().studentStats?.rombelClass9 || 5 }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Metric 3: Jumlah Guru -->
+        <div
+          class="bg-white p-6 rounded-3xl border border-slate-200 shadow-xs hover:border-[#0052FF]/60 hover:shadow-md transition-all group"
+          appScrollReveal
+          data-aos-delay="150"
+        >
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-12 h-12 rounded-2xl bg-blue-50 text-[#0052FF] flex items-center justify-center group-hover:scale-105 transition-transform">
+              <mat-icon class="text-2xl">groups</mat-icon>
+            </div>
+            <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full">
+              S1 & S2
+            </span>
+          </div>
+
+          <div class="space-y-1">
+            <span class="text-3xl sm:text-4xl font-extrabold text-[#0052FF] font-mono tracking-tight block">
+              {{ profile().studentStats?.totalTeachers || 28 }} Guru
+            </span>
+            <h3 class="text-base font-bold text-slate-900">Jumlah Guru</h3>
+            <p class="text-xs text-slate-500">Tenaga pendidik bidang studi</p>
+          </div>
+
+          <div class="mt-5 pt-4 border-t border-slate-100 text-xs text-slate-600 flex items-center justify-between">
+            <span class="font-medium">Tersertifikasi Pendidik:</span>
+            <span class="font-bold text-[#0052FF]">{{ profile().studentStats?.certifiedTeachers || 22 }} Guru</span>
+          </div>
+        </div>
+
+        <!-- Metric 4: Jumlah Tenaga Pendidik / Tenaga Kependidikan -->
+        <div
+          class="bg-white p-6 rounded-3xl border border-slate-200 shadow-xs hover:border-[#0052FF]/60 hover:shadow-md transition-all group"
+          appScrollReveal
+          data-aos-delay="200"
+        >
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-12 h-12 rounded-2xl bg-blue-50 text-[#0052FF] flex items-center justify-center group-hover:scale-105 transition-transform">
+              <mat-icon class="text-2xl">badge</mat-icon>
+            </div>
+            <span class="text-[11px] font-bold uppercase tracking-wider text-[#0052FF] bg-blue-50 px-2.5 py-1 rounded-full">
+              Tata Usaha & Staf
+            </span>
+          </div>
+
+          <div class="space-y-1">
+            <span class="text-3xl sm:text-4xl font-extrabold text-[#0052FF] font-mono tracking-tight block">
+              {{ profile().studentStats?.totalEducationalStaff || 10 }} Staf
+            </span>
+            <h3 class="text-base font-bold text-slate-900">Tenaga Kependidikan</h3>
+            <p class="text-xs text-slate-500">Layanan administrasi & operasional</p>
+          </div>
+
+          <div class="mt-5 pt-4 border-t border-slate-100 text-xs text-slate-600 flex items-center justify-between">
+            <span class="font-medium">Bidang Layanan:</span>
+            <span class="font-bold text-slate-800">TU, IT, Lab, Pustaka</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+
+  <!-- 4. Sekretariat & Informasi Resmi -->
+  <section class="py-14 sm:py-16 bg-white">
+    <div class="max-w-full px-6 sm:px-10 lg:px-16">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6" appScrollReveal>
+        
+        <div class="p-6 rounded-2xl border border-slate-200 bg-white shadow-2xs">
+          <div class="w-10 h-10 rounded-xl bg-blue-50 text-[#0052FF] flex items-center justify-center mb-4">
+            <mat-icon>place</mat-icon>
+          </div>
+          <h3 class="text-sm font-bold text-slate-900">Alamat Sekolah</h3>
+          <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+            {{ profile().address }}
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl border border-slate-200 bg-white shadow-2xs">
+          <div class="w-10 h-10 rounded-xl bg-blue-50 text-[#0052FF] flex items-center justify-center mb-4">
+            <mat-icon>schedule</mat-icon>
+          </div>
+          <h3 class="text-sm font-bold text-slate-900">Jam Layanan Sekolah</h3>
+          <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+            {{ profile().operatingHours }}
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl border border-slate-200 bg-white shadow-2xs">
+          <div class="w-10 h-10 rounded-xl bg-blue-50 text-[#0052FF] flex items-center justify-center mb-4">
+            <mat-icon>contact_phone</mat-icon>
+          </div>
+          <h3 class="text-sm font-bold text-slate-900">Kontak Resmi</h3>
+          <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+            Telp: {{ profile().phone }}<br>
+            Email: {{ profile().email }}
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</div>

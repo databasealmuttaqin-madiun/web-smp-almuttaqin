@@ -1,0 +1,265 @@
+@if (isOpen()) {
+  <div
+    role="dialog"
+    aria-modal="true"
+    tabindex="-1"
+    class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-fadeIn"
+    (keydown.escape)="close()"
+  >
+    <!-- Background dismissal button -->
+    <button
+      type="button"
+      class="fixed inset-0 w-full h-full cursor-default bg-transparent border-0"
+      (click)="close()"
+      aria-label="Tutup brosur"
+    ></button>
+
+    <div
+      class="bg-white rounded-3xl max-w-3xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden relative z-10 animate-scaleUp"
+    >
+      <!-- Modal Header (Brosur Header) -->
+      <div class="p-6 bg-gradient-to-r from-emerald-950 via-emerald-900 to-slate-900 text-white flex items-start justify-between">
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-xl bg-amber-400 text-emerald-950 flex items-center justify-center font-bold shrink-0">
+            <mat-icon class="text-2xl">picture_as_pdf</mat-icon>
+          </div>
+          <div>
+            <span class="text-xs font-semibold text-emerald-300 uppercase tracking-widest block">Dokumen Resmi PPDB 2026/2027</span>
+            <h3 class="text-lg sm:text-xl font-bold text-white leading-tight">
+              {{ profile().name }}
+            </h3>
+            <p class="text-xs text-slate-300 mt-0.5">
+              {{ profile().accreditation }} · NPSN: {{ profile().npsn }}
+            </p>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          (click)="close()"
+          class="p-2 text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-colors cursor-pointer"
+          aria-label="Tutup brosur"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+
+      <!-- Segmented Navigation Tabs for Brochure Chapters -->
+      <div class="flex items-center gap-2 p-3 bg-slate-100 border-b border-slate-200 overflow-x-auto">
+        <button
+          type="button"
+          (click)="setTab('overview')"
+          [class]="activeTab() === 'overview'
+            ? 'px-4 py-2 text-xs font-bold rounded-xl bg-white text-emerald-900 shadow-xs cursor-pointer whitespace-nowrap shrink-0'
+            : 'px-4 py-2 text-xs font-medium rounded-xl text-slate-600 hover:text-slate-900 cursor-pointer whitespace-nowrap shrink-0'"
+        >
+          1. Profil & Program
+        </button>
+        <button
+          type="button"
+          (click)="setTab('fees')"
+          [class]="activeTab() === 'fees'
+            ? 'px-4 py-2 text-xs font-bold rounded-xl bg-white text-emerald-900 shadow-xs cursor-pointer whitespace-nowrap shrink-0'
+            : 'px-4 py-2 text-xs font-medium rounded-xl text-slate-600 hover:text-slate-900 cursor-pointer whitespace-nowrap shrink-0'"
+        >
+          2. Skema Biaya & Gelombang
+        </button>
+        <button
+          type="button"
+          (click)="setTab('requirements')"
+          [class]="activeTab() === 'requirements'
+            ? 'px-4 py-2 text-xs font-bold rounded-xl bg-white text-emerald-900 shadow-xs cursor-pointer whitespace-nowrap shrink-0'
+            : 'px-4 py-2 text-xs font-medium rounded-xl text-slate-600 hover:text-slate-900 cursor-pointer whitespace-nowrap shrink-0'"
+        >
+          3. Syarat & Kontak
+        </button>
+      </div>
+
+      <!-- Scrollable Content Body -->
+      <div class="p-6 sm:p-8 overflow-y-auto space-y-6 flex-1 text-slate-700 text-sm">
+        
+        <!-- Tab 1: Overview -->
+        @if (activeTab() === 'overview') {
+          <div class="space-y-5 animate-fadeIn">
+            <div>
+              <h4 class="text-base font-bold text-slate-900 mb-2">Tentang SMP Al Muttaqin Kota Madiun</h4>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                SMP Al Muttaqin adalah lembaga pendidikan menengah pertama berwawasan Islami di Kota Madiun yang memadukan keunggulan adab, kemampuan hafalan Al-Qur'an 3-5 juz, kecakapan sains, dan teknologi digital.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-emerald-50 border border-emerald-100">
+              <h5 class="text-xs font-bold uppercase tracking-wider text-emerald-900 mb-2">4 Program Peminatan Siswa:</h5>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                @for (prog of programs(); track prog.id) {
+                  <div class="bg-white p-3 rounded-xl border border-emerald-100">
+                    <span class="font-bold text-xs text-emerald-800 block">{{ prog.title }}</span>
+                    <span class="text-xs text-slate-600">{{ prog.badge }}</span>
+                  </div>
+                }
+              </div>
+            </div>
+
+            <div>
+              <h4 class="text-base font-bold text-slate-900 mb-2">Jadwal Harian Siswa (Full-Day School)</h4>
+              <div class="space-y-1.5 text-xs text-slate-600">
+                <div class="flex justify-between py-1 border-b border-slate-100">
+                  <span class="font-mono tabular-nums font-semibold">06.45 - 07.15 WIB</span>
+                  <span>Kedatangan, Shalat Dhuha & Pembiasaan Pagi</span>
+                </div>
+                <div class="flex justify-between py-1 border-b border-slate-100">
+                  <span class="font-mono tabular-nums font-semibold">07.15 - 08.00 WIB</span>
+                  <span>Halaqah Tahfidz & Tahsin Al-Qur'an</span>
+                </div>
+                <div class="flex justify-between py-1 border-b border-slate-100">
+                  <span class="font-mono tabular-nums font-semibold">08.00 - 11.45 WIB</span>
+                  <span>Kegiatan Belajar Kurikulum Merdeka (Sesi 1)</span>
+                </div>
+                <div class="flex justify-between py-1 border-b border-slate-100">
+                  <span class="font-mono tabular-nums font-semibold">11.45 - 13.00 WIB</span>
+                  <span>Shalat Zhuhur Berjamaah & Makan Siang Sehat</span>
+                </div>
+                <div class="flex justify-between py-1 border-b border-slate-100">
+                  <span class="font-mono tabular-nums font-semibold">13.00 - 15.30 WIB</span>
+                  <span>Pembelajaran Sesi 2 / Ekstrakurikuler & Shalat Ashar</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+
+        <!-- Tab 2: Fees & Waves -->
+        @if (activeTab() === 'fees') {
+          <div class="space-y-5 animate-fadeIn">
+            <div>
+              <h4 class="text-base font-bold text-slate-900 mb-2">Simulasi Biaya Masuk & Administrasi PPDB</h4>
+              <p class="text-xs text-slate-600 mb-3">
+                Biaya diatur secara transparan, sudah mencakup seragam lengkap, modul pembelajaran, dan kegiatan orientasi.
+              </p>
+
+              <div class="border border-slate-200 rounded-2xl overflow-hidden">
+                <table class="w-full text-left text-xs">
+                  <thead class="bg-slate-100 text-slate-700 font-bold">
+                    <tr>
+                      <th class="p-3">Komponen Biaya</th>
+                      <th class="p-3 text-right">Rincian Perkiraan</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-slate-100">
+                    <tr>
+                      <td class="p-3">Infaq Formulir & Uji Pemetaan</td>
+                      <td class="p-3 text-right font-mono font-bold text-slate-800 tabular-nums">Gratis (Gelombang I)</td>
+                    </tr>
+                    <tr>
+                      <td class="p-3">Seragam Lengkap (5 Stel + Atribut)</td>
+                      <td class="p-3 text-right font-mono text-slate-800 tabular-nums">Rp 1.450.000</td>
+                    </tr>
+                    <tr>
+                      <td class="p-3">Buku Modul, Perpustakaan & Laboratorium (1 Thn)</td>
+                      <td class="p-3 text-right font-mono text-slate-800 tabular-nums">Rp 850.000</td>
+                    </tr>
+                    <tr>
+                      <td class="p-3">Dana Pengembangan Pendidikan (DPP)</td>
+                      <td class="p-3 text-right font-mono text-slate-800 tabular-nums">
+                        Diskon s.d. 25% (Jalur Prestasi)
+                      </td>
+                    </tr>
+                    <tr class="bg-emerald-50">
+                      <td class="p-3 font-bold text-emerald-900">SPP Bulanan Terpadu (Include Makan Siang)</td>
+                      <td class="p-3 text-right font-mono font-bold text-emerald-900 tabular-nums">Rp 650.000 / bln</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="text-xs text-slate-500 mt-2 italic">
+                *Keringanan beasiswa bagi anak yatim/piatu berprestasi dan keluarga prasejahtera tersedia melalui verifikasi panitia.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-amber-50 border border-amber-200">
+              <span class="text-xs font-bold uppercase tracking-wider text-amber-800 block mb-1">
+                Prioritas Gelombang I
+              </span>
+              <p class="text-xs text-amber-900">
+                Pendaftaran Gelombang I dibuka hingga 31 Januari 2026. Kursi kelas peminatan terbatas untuk 32 siswa pertama.
+              </p>
+            </div>
+          </div>
+        }
+
+        <!-- Tab 3: Requirements -->
+        @if (activeTab() === 'requirements') {
+          <div class="space-y-5 animate-fadeIn">
+            <div>
+              <h4 class="text-base font-bold text-slate-900 mb-2">Kelengkapan Berkas Pendaftaran</h4>
+              <ul class="space-y-2 text-xs text-slate-700">
+                <li class="flex items-center gap-2">
+                  <mat-icon class="text-sm text-emerald-700">check</mat-icon>
+                  <span>2 Lembar Fotokopi Akta Kelahiran</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <mat-icon class="text-sm text-emerald-700">check</mat-icon>
+                  <span>2 Lembar Fotokopi Kartu Keluarga (KK)</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <mat-icon class="text-sm text-emerald-700">check</mat-icon>
+                  <span>2 Lembar Fotokopi KTP Orang Tua / Wali</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <mat-icon class="text-sm text-emerald-700">check</mat-icon>
+                  <span>Fotokopi Rapor SD Kelas 5 & 6 (dilegalisir)</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <mat-icon class="text-sm text-emerald-700">check</mat-icon>
+                  <span>Pas Foto Berwarna 3x4 (4 lembar)</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <mat-icon class="text-sm text-emerald-700">check</mat-icon>
+                  <span>Piagam Penghargaan / Syahadah Tahfidz (Jalur Prestasi)</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-2 text-xs">
+              <div class="font-bold text-slate-800">Sekretariat Panitia PPDB:</div>
+              <p class="text-slate-600">{{ profile().address }}</p>
+              <p class="text-slate-600">Telepon: {{ profile().phone }}</p>
+              <p class="text-emerald-800 font-bold font-mono">WhatsApp: {{ profile().whatsappFormatted }}</p>
+            </div>
+          </div>
+        }
+
+      </div>
+
+      <!-- Modal Footer Actions -->
+      <div class="p-5 bg-slate-50 border-t border-slate-200 flex flex-wrap items-center justify-between gap-3">
+        <button
+          type="button"
+          (click)="download()"
+          class="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold text-emerald-900 bg-white hover:bg-slate-100 border border-slate-300 rounded-xl transition-colors cursor-pointer"
+        >
+          <mat-icon class="text-base">download</mat-icon>
+          <span>Unduh Berkas Brosur (.txt / PDF)</span>
+        </button>
+
+        <div class="flex items-center gap-2">
+          <button
+            type="button"
+            (click)="close()"
+            class="px-4 py-2.5 text-xs font-semibold text-slate-600 hover:text-slate-900 transition-colors cursor-pointer"
+          >
+            Tutup
+          </button>
+          <button
+            type="button"
+            (click)="openWhatsApp()"
+            class="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold text-white bg-emerald-800 hover:bg-emerald-900 rounded-xl shadow-xs transition-colors cursor-pointer"
+          >
+            <mat-icon class="text-base">chat</mat-icon>
+            <span>Daftar via WhatsApp</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+}
