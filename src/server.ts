@@ -46,6 +46,7 @@ import { createClient } from '@supabase/supabase-js';
 const supabaseUrl = 'https://jcoxoybduffemhdphbji.supabase.co';
 const supabaseAnonKey = 'sb_publishable_oUFrgimHv4kLqhqn4FchZg_ScgQ5aXo';
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
+console.log('Supabase client initialized with URL:', supabaseUrl);
 
 /**
  * REST API endpoints for synchronized persistent school data using Supabase
