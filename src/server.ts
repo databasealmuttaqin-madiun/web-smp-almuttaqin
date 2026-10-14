@@ -41,39 +41,102 @@ function saveSchoolData(data: unknown) {
   }
 }
 
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = 'https://jcoxoybduffemhdphbji.supabase.co';
+const supabaseAnonKey = 'sb_publishable_oUFrgimHv4kLqhqn4FchZg_ScgQ5aXo';
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
 /**
- * REST API endpoints for synchronized persistent school data
+ * REST API endpoints for synchronized persistent school data using Supabase
  */
-app.get('/api/school-data', (req, res) => {
-  const data = getSchoolData();
-  if (data) {
-    res.json(data);
+app.get('/api/school-data', async (req, res) => {
+  console.log('Fetching data from Supabase...');
+  const { data, error } = await supabase
+    .from('profil_sekolah')
+    .select('*')
+    .maybeSingle();
+
+  if (error) {
+    console.error('Error fetching data from Supabase:', error);
+    res.status(500).json({ error: 'Failed to fetch data', details: error });
+  } else if (!data) {
+    console.log('No data found in Supabase.');
+    res.status(404).json({ error: 'Profile not found' });
   } else {
-    res.status(500).json({ error: 'Data not initialized' });
+    console.log('Data fetched successfully:', data);
+    // Mapping Supabase columns to frontend model
+    const profile = {
+      name: data.nama,
+      tagline: data.semboyan,
+      motto: data.motto,
+      accreditation: data.akreditasi,
+      npsn: data.npsn,
+      city: data.kota,
+      address: data.alamat,
+      phone: data.telepon,
+      whatsapp: data.whatsapp,
+      whatsappFormatted: data.whatsapp_terformat,
+      email: data.email,
+      operatingHours: data.jam_operasional,
+      schoolPhotoUrl: data.url_foto_sekolah,
+      shortDescription: data.deskripsi_singkat,
+      vision: data.visi,
+      missions: data.misi,
+      principalName: data.nama_kepala_sekolah,
+      principalTitle: data.jabatan_kepala_sekolah,
+      principalPhotoUrl: data.url_foto_kepala_sekolah,
+      principalWelcome: data.sambutan_kepala_sekolah
+    };
+    res.json({ profile });
   }
 });
 
-app.put('/api/school-data', (req, res) => {
+app.put('/api/school-data', async (req, res) => {
   try {
-    const existing = getSchoolData() || {};
-    const updated = {
-      ...existing,
-      ...req.body,
-      // If profile is partially updated, merge inner objects
-      profile: req.body.profile
-        ? {
-            ...(existing.profile || {}),
-            ...req.body.profile,
-            studentStats: {
-              ...((existing.profile && existing.profile.studentStats) || {}),
-              ...(req.body.profile.studentStats || {})
-            }
-          }
-        : existing.profile
-    };
+    const { profile } = req.body;
+    if (!profile) {
+      res.status(400).json({ error: 'Invalid profile data' });
+      return;
+    }
 
-    saveSchoolData(updated);
-    res.json({ success: true, data: updated });
+    // Mapping frontend model fields back to Supabase columns
+    const dbProfile = {
+      nama: profile.name,
+      semboyan: profile.tagline,
+      motto: profile.motto,
+      akreditasi: profile.accreditation,
+      npsn: profile.npsn,
+      kota: profile.city,
+      alamat: profile.address,
+      telepon: profile.phone,
+      whatsapp: profile.whatsapp,
+      whatsapp_terformat: profile.whatsappFormatted,
+      email: profile.email,
+      jam_operasional: profile.operatingHours,
+      url_foto_sekolah: profile.schoolPhotoUrl,
+      deskripsi_singkat: profile.shortDescription,
+      visi: profile.vision,
+      misi: profile.missions,
+      nama_kepala_sekolah: profile.principalName,
+      jabatan_kepala_sekolah: profile.principalTitle,
+      url_foto_kepala_sekolah: profile.principalPhotoUrl,
+      sambutan_kepala_sekolah: profile.principalWelcome
+    };
+    
+    const { data, error } = await supabase
+      .from('profil_sekolah')
+      .update(dbProfile)
+      .eq('id', 1)
+      .select()
+      .maybeSingle();
+
+    if (error) {
+      console.error('Error updating data in Supabase:', error);
+      res.status(500).json({ error: 'Failed to update data' });
+    } else {
+      res.json({ success: true, data: { profile: data } });
+    }
   } catch (err) {
     console.error('Failed to update school data:', err);
     res.status(500).json({ error: 'Failed to update data' });
